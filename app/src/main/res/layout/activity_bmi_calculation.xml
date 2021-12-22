@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BMI_calculation">
+    android:background="#FFFFFF"
+    tools:context=".java.BMI_calculation">
 
     <LinearLayout
         android:id="@+id/linearLayout"

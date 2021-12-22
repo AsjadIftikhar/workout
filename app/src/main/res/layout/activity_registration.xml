@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationActivity"
+    tools:context=".java.RegistrationActivity"
     android:background="@drawable/ic_iphone_12_pro_max___11">
 
 
@@ -53,8 +53,9 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="match_parent"
+                android:layout_width="210dp"
                 android:layout_height="68dp"
+                android:layout_marginLeft="100dp"
                 android:text="Registration"
                 android:textAlignment="center"
                 android:textAllCaps="false"
@@ -69,7 +70,10 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Name"
+                android:textColorHint="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:paddingLeft="20dp"
@@ -83,7 +87,10 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:hint="Email"
+                android:textColorHint="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:paddingLeft="20dp"
@@ -97,7 +104,10 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Password"
+                android:textColorHint="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:paddingLeft="20dp"
@@ -111,7 +121,10 @@
                 android:ems="10"
                 android:inputType="number"
                 android:hint="Age"
+                android:textColorHint="#000000"
+                android:textSize="20dp"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:paddingLeft="20dp"
@@ -135,7 +148,9 @@
                     android:inputType="number"
                     android:paddingLeft="20dp"
                     android:hint="Height in cm"
-
+                    android:textColorHint="#000000"
+                    android:textSize="18dp"
+                    android:textColor="#000000"
                     android:textStyle="bold" />
 
                 <EditText
@@ -149,7 +164,9 @@
                     android:inputType="number"
                     android:paddingLeft="20dp"
                     android:hint="Weight in cm"
-
+                    android:textColorHint="#000000"
+                    android:textSize="18dp"
+                    android:textColor="#000000"
                     android:textStyle="bold" />
             </LinearLayout>
             <Button
@@ -162,7 +179,7 @@
 
                 android:text="Register"
                 android:textStyle="bold"
-                android:textColor="#707070"
+                android:textColor="#000000"
                 app:backgroundTint="#FFFFFF"
                 app:iconTint="#DEE1F4"
                 app:layout_constraintEnd_toEndOf="parent"
