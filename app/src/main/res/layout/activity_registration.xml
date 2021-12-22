@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity"
+    android:background="@drawable/ic_iphone_12_pro_max___11">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="165dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_dumbbell" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="307dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Digital Workout"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.512"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:text="Registration"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/tv_name"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:paddingLeft="20dp"
+
+                android:background="@drawable/custom_editview"
+                />
+            <EditText
+                android:id="@+id/tv_email"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:paddingLeft="20dp"
+
+                android:background="@drawable/custom_editview"
+                />
+            <EditText
+                android:id="@+id/tv_password"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Password"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:paddingLeft="20dp"
+
+                android:background="@drawable/custom_editview"
+                />
+            <EditText
+                android:id="@+id/tv_Age"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Age"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:paddingLeft="20dp"
+
+                android:background="@drawable/custom_editview"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tv_height"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/custom_editview"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="20dp"
+                    android:hint="Height in cm"
+
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tv_weight"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/custom_editview"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingLeft="20dp"
+                    android:hint="Weight in cm"
+
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="108dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginLeft="150dp"
+                android:background="@drawable/custom_buttons"
+
+                android:text="Register"
+                android:textStyle="bold"
+                android:textColor="#707070"
+                app:backgroundTint="#FFFFFF"
+                app:iconTint="#DEE1F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
