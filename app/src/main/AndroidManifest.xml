@@ -79,6 +79,12 @@
             android:name=".preference.SettingsActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".botton_nav"
+            android:exported="false"/>
+
+
+
     </application>
     <queries>
         <intent>

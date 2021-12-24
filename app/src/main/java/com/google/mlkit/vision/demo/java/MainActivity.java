@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.botton_nav;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent_act =new Intent(MainActivity.this,HomeActivity.class);
+                Intent intent_act =new Intent(MainActivity.this, botton_nav.class);
                 startActivity(intent_act);
                 finish();
             }
