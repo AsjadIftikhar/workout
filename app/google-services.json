@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "934998248351",
+    "project_id": "ml-kit-vision-quickstart-ba0d0",
+    "storage_bucket": "ml-kit-vision-quickstart-ba0d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934998248351:android:74ebbc0e86d10a49cc4baa",
+        "android_client_info": {
+          "package_name": "com.google.mlkit.vision.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934998248351-bl82dovt9hm7ta8h7vg00blq73ajmc73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKI0_QSMd05vp626ctJ4h9i_k2AT7IhZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934998248351-bl82dovt9hm7ta8h7vg00blq73ajmc73.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

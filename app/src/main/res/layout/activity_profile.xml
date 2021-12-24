@@ -34,7 +34,7 @@
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:layout_marginTop="35dp"
-            android:text="Body Fat Calculation"
+            android:text=" Profile Page"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -54,7 +54,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Age"
+        android:text="Name"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -62,8 +62,8 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
-        android:id="@+id/tv_age_bf_num"
-        android:layout_width="160dp"
+        android:id="@+id/prof_name"
+        android:layout_width="172dp"
         android:layout_height="36dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
@@ -78,21 +78,52 @@
 
 
     <EditText
-        android:id="@+id/tv_sex"
-        android:layout_width="160dp"
+        android:id="@+id/prof_height"
+        android:layout_width="172dp"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:hint="M/F"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf_num" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_age" />
+
+    <EditText
+        android:id="@+id/prof_pass"
+        android:layout_width="172dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_editview_1"
+        android:ems="10"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prof_height" />
+
+    <EditText
+        android:id="@+id/prof_new_pass"
+        android:layout_width="172dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_editview_1"
+        android:ems="10"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prof_pass" />
 
     <TextView
         android:id="@+id/tv_height_bf"
@@ -101,7 +132,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Height"
+        android:text="Email"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -109,21 +140,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_age_bf" />
 
     <EditText
-        android:id="@+id/tv_height_bf_num"
-        android:layout_width="160dp"
+        android:id="@+id/prof_email"
+        android:layout_width="172dp"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:hint="in cm"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_bf_num" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_name" />
 
 
     <TextView
@@ -133,7 +163,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Weight"
+        android:text="Age"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -147,36 +177,63 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Sex"
+        android:text="Height"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf" />
 
+    <TextView
+        android:id="@+id/tv_weight_bf4"
+        android:layout_width="130dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_textview"
+        android:text="Password"
+        android:textColor="#4F6CDE"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf2" />
+
+    <TextView
+        android:id="@+id/tv_weight_bf5"
+        android:layout_width="130dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_textview"
+        android:text="New Password"
+        android:textColor="#4F6CDE"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf4" />
+
     <EditText
-        android:id="@+id/tv_weight_bf_num"
-        android:layout_width="157dp"
+        android:id="@+id/prof_age"
+        android:layout_width="172dp"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:hint="In kg"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_bf_num" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_email" />
 
     <TextView
-        android:id="@+id/tv_bf_value"
+        android:id="@+id/prof_status"
         android:layout_width="352dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_textview"
         android:text=""
@@ -186,41 +243,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sex" />
-
-    <TextView
-        android:id="@+id/tv_bf_comment"
-        android:layout_width="352dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/custom_textview"
-        android:text=""
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bf_value" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_new_pass" />
 
     <Button
-        android:id="@+id/btn_calculate_bf"
+        android:id="@+id/prof_update"
         android:layout_width="352dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
 
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_buttons"
-        android:text="Calculate"
+        android:text="Update Profile"
         android:textColor="#FFFFFF"
         app:backgroundTint="#CF505F"
         app:iconTint="#DEE1F4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bf_comment" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_status" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout><?xml version="1.0" encoding="utf-8"?>
