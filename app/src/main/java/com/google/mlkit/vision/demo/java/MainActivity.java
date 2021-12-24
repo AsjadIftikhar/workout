@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent_act =new Intent(MainActivity.this, botton_nav.class);
+                Intent intent_act =new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent_act);
                 finish();
             }

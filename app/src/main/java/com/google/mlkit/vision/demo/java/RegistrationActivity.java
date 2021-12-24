@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +16,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.vision.demo.R;
 
 public class RegistrationActivity extends AppCompatActivity {
     EditText name,email,password,age,height,weight;
     Button register_button;
     FirebaseAuth mAuth;
+    FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,8 @@ public class RegistrationActivity extends AppCompatActivity {
         register_button=findViewById(R.id.btn_register);
 
         mAuth=FirebaseAuth.getInstance();
-
+        //database= FirebaseDatabase.getInstance();
+        //final DatabaseReference myRef = database.getReference("users");
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,34 +53,68 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(Name)){
                     name.setError("Fill Name field");
+                    name.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Email)){
+                if(TextUtils.isEmpty(Email)){
                     email.setError("Fill Email field");
+                    email.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Password)){
+                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                    email.setError("Please enter a valid Email");
+                    email.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(Password)){
                     password.setError("Fill password field");
+                    password.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Age)){
+                if (Password.length()<6){
+                    password.setError("Password length is <6");
+                    password.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(Age)){
                     age.setError("Fill Age field");
+                    age.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Height)){
+                if(TextUtils.isEmpty(Height)){
                     height.setError("Fill Height field");
+                    height.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Weight)){
+                if(TextUtils.isEmpty(Weight)){
                     weight.setError("Fill Weight field");
+                    weight.requestFocus();
                     return;
                 }
+
+
                 else{
                     mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(RegistrationActivity.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(RegistrationActivity.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
+                                User u= new User(Name,Email,Password,Age,Height,Weight);
+                                FirebaseDatabase.getInstance().getReference("users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(RegistrationActivity.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            Toast.makeText(RegistrationActivity.this,"Failed to register User",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                                //String keyID=myRef.push().getKey();
+                                //myRef.child(keyID).setValue(u);
                                 startActivity(new Intent(RegistrationActivity.this,HomeActivity.class));
                             }else{
                                 Toast.makeText(RegistrationActivity.this,"User Not Registered",Toast.LENGTH_SHORT).show();
