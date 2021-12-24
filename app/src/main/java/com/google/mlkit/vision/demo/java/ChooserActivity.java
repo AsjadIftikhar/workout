@@ -36,7 +36,9 @@ import android.widget.TextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
-import com.google.mlkit.vision.demo.BuildConfig;
+
+import com.google.android.datatransport.backend.cct.BuildConfig;
+//import com.google.mlkit.vision.demo.BuildConfig;
 import com.google.mlkit.vision.demo.R;
 import java.util.ArrayList;
 import java.util.List;
