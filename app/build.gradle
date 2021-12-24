@@ -1,17 +1,17 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.workout"
+        //applicationId "com.example.workout"
+        applicationId "com.google.mlkit.vision.demo"
         minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -19,6 +19,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexKeepFile file('multidex-main-dex-list.txt')
         }
     }
     compileOptions {
@@ -28,6 +29,33 @@ android {
 }
 
 dependencies {
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    // Pose detection with default models
+    implementation 'com.google.mlkit:pose-detection:17.0.1-beta6'
+    implementation 'com.google.mlkit:camera:16.0.0-beta1'
+
+    androidTestImplementation 'androidx.test:core:1.3.0'
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+
+    implementation 'androidx.annotation:annotation:1.2.0'
+
+
+
+    implementation "androidx.camera:camera-camera2:1.0.0-SNAPSHOT"
+    implementation "androidx.camera:camera-lifecycle:1.0.0-SNAPSHOT"
+    implementation "androidx.camera:camera-view:1.0.0-SNAPSHOT"
+
+    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation 'com.google.firebase:firebase-database-ktx'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.guava:guava:27.1-android'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
 
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
