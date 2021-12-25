@@ -65,14 +65,13 @@
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="60dp"
                 android:background="@drawable/custom_buttons"
+                android:drawableStart="@drawable/ic_calculator"
                 android:text="BMI Calculation"
                 android:textColor="#FFFFFF"
-                app:backgroundTint="#CF505F"
-                app:iconTint="#DEE1F4"
-                android:textStyle="bold"
                 android:textSize="15dp"
-
-                />
+                android:textStyle="bold"
+                app:backgroundTint="#CF505F"
+                app:iconTint="#DEE1F4" />
 
             <Button
                 android:id="@+id/btn_bf_activity"
@@ -87,7 +86,7 @@
                 app:iconTint="#DEE1F4"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                />
+                android:drawableStart="@drawable/ic_calculator" />
 
         </LinearLayout>
 
