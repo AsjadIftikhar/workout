@@ -24,7 +24,6 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText name,email,password,age,height,weight;
     Button register_button;
     FirebaseAuth mAuth;
-    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +38,6 @@ public class RegistrationActivity extends AppCompatActivity {
         register_button=findViewById(R.id.btn_register);
 
         mAuth=FirebaseAuth.getInstance();
-        //database= FirebaseDatabase.getInstance();
-        //final DatabaseReference myRef = database.getReference("users");
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,9 +95,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                //Toast.makeText(RegistrationActivity.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
                                 User u= new User(Name,Email,Password,Age,Height,Weight);
-                                FirebaseDatabase.getInstance().getReference("users")
+
+                                FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -109,12 +106,10 @@ public class RegistrationActivity extends AppCompatActivity {
                                             Toast.makeText(RegistrationActivity.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
                                         }
                                         else{
-                                            Toast.makeText(RegistrationActivity.this,"Failed to register User",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegistrationActivity.this,"Failed to register User!",Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                                //String keyID=myRef.push().getKey();
-                                //myRef.child(keyID).setValue(u);
                                 startActivity(new Intent(RegistrationActivity.this,HomeActivity.class));
                             }else{
                                 Toast.makeText(RegistrationActivity.this,"User Not Registered",Toast.LENGTH_SHORT).show();
