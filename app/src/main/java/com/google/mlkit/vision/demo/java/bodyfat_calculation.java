@@ -21,7 +21,7 @@ public class bodyfat_calculation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bodyfat_calculation);
-
+        getSupportActionBar().hide();
         btn_calculate_bf = findViewById(R.id.btn_calculate_bf);
         age = findViewById(R.id.tv_age_bf_num);
         height = findViewById(R.id.tv_height_bf_num);

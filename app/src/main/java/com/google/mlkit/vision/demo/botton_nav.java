@@ -16,7 +16,7 @@ public class botton_nav extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_botton_nav);
         getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer,new HomeFragment()).commit();
-
+        getSupportActionBar().hide();
         bnv=findViewById(R.id.bottomNavigation);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

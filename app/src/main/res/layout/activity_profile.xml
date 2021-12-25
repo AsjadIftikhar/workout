@@ -11,15 +11,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="413dp"
         android:layout_height="103dp"
-        android:layout_marginBottom="628dp"
 
         android:background="@drawable/ic_iphone_12_pro_max___11"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -36,8 +33,9 @@
             android:layout_marginTop="35dp"
             android:text=" Profile Page"
             android:textAlignment="center"
+            android:paddingLeft="30dp"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             android:typeface="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,61 +45,51 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_age_bf"
-        android:layout_width="128dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/custom_textview"
-        android:text="Name"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
         android:id="@+id/prof_name"
-        android:layout_width="172dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         android:textAlignment="center"
+        android:paddingLeft="10dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prof_status" />
 
     <EditText
         android:id="@+id/prof_height"
-        android:layout_width="172dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
+        android:hint="in cm"
         android:inputType="number"
+        android:paddingLeft="60dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prof_age" />
 
     <EditText
         android:id="@+id/prof_pass"
         android:layout_width="172dp"
         android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:paddingLeft="10dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -113,11 +101,11 @@
         android:id="@+id/prof_new_pass"
         android:layout_width="172dp"
         android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -125,85 +113,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prof_pass" />
 
-    <TextView
-        android:id="@+id/tv_height_bf"
-        android:layout_width="128dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_textview"
-        android:text="Email"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_bf" />
-
     <EditText
         android:id="@+id/prof_email"
-        android:layout_width="172dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prof_name" />
 
-
-    <TextView
-        android:id="@+id/tv_weight_bf"
-        android:layout_width="130dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_textview"
-        android:text="Age"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_bf" />
-
-    <TextView
-        android:id="@+id/tv_weight_bf2"
-        android:layout_width="130dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_textview"
-        android:text="Height"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf" />
 
     <TextView
         android:id="@+id/tv_weight_bf4"
         android:layout_width="130dp"
         android:layout_height="36dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/custom_textview"
         android:text="Password"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_bf2" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_height" />
 
     <TextView
         android:id="@+id/tv_weight_bf5"
-        android:layout_width="130dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/custom_textview"
         android:text="New Password"
         android:textColor="#4F6CDE"
@@ -214,36 +161,34 @@
 
     <EditText
         android:id="@+id/prof_age"
-        android:layout_width="172dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
         android:ems="10"
+        android:paddingLeft="10dp"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prof_email" />
 
     <TextView
         android:id="@+id/prof_status"
         android:layout_width="352dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
         android:text=""
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prof_new_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/pass_update"
@@ -255,12 +200,13 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_buttons"
         android:text="Update Password"
+        android:textSize="20dp"
         android:textColor="#FFFFFF"
         app:backgroundTint="#CF505F"
         app:iconTint="#DEE1F4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prof_status" />
+        app:layout_constraintTop_toBottomOf="@+id/prof_new_pass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout><?xml version="1.0" encoding="utf-8"?>

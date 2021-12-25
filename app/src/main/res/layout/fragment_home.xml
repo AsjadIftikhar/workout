@@ -15,10 +15,8 @@
             android:id="@+id/pageIDlayout"
             android:layout_width="match_parent"
             android:layout_height="103dp"
-            android:layout_marginBottom="628dp"
             android:background="@drawable/ic_iphone_12_pro_max___11"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -38,6 +36,7 @@
                 android:layout_marginTop="35dp"
                 android:text="Digital Workout"
                 android:textAlignment="center"
+                android:paddingLeft="30dp"
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
@@ -51,10 +50,9 @@
 
         <LinearLayout
             android:id="@+id/pageDataLayout"
-            android:layout_width="412dp"
-            android:layout_height="623dp"
+            android:layout_width="390dp"
+            android:layout_height="290dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pageIDlayout">
@@ -64,13 +62,15 @@
                 android:id="@+id/btn_bmi_activity"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
                 android:layout_marginLeft="80dp"
-                android:text="BMI Calculation"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/custom_buttons"
+                android:text="BMI Calculation"
                 android:textColor="#FFFFFF"
                 app:backgroundTint="#CF505F"
                 app:iconTint="#DEE1F4"
+                android:textStyle="bold"
+                android:textSize="15dp"
 
                 />
 
@@ -78,16 +78,28 @@
                 android:id="@+id/btn_bf_activity"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="90dp"
                 android:layout_marginLeft="80dp"
-                android:text="Body Fat Calclation"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/custom_buttons"
+                android:text="Body Fat Calclation"
                 android:textColor="#FFFFFF"
                 app:backgroundTint="#CF505F"
                 app:iconTint="#DEE1F4"
-
+                android:textStyle="bold"
+                android:textSize="15dp"
                 />
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="327dp"
+            android:layout_height="333dp"
+            android:src="@drawable/ic_exercise"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pageDataLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
