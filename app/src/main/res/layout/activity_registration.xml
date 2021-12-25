@@ -54,11 +54,11 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="210dp"
+                android:layout_width="283dp"
                 android:layout_height="68dp"
                 android:layout_marginLeft="100dp"
-                android:text="Registration"
                 android:paddingLeft="20dp"
+                android:text="Registration"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
