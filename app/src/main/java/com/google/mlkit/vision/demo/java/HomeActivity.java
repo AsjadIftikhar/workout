@@ -37,10 +37,10 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
         //FirebaseUser user=mAuth.getCurrentUser();
-        /*if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(HomeActivity.this,LivePreviewActivity.class));
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(HomeActivity.this,botton_nav.class));
             finish();
-        }*/
+        }
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,17 +51,17 @@ public class HomeActivity extends AppCompatActivity {
                     email.requestFocus();
                     return;
                 }
-                else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
                     email.setError("Please enter a valid Email");
                     email.requestFocus();
                     return;
                 }
-                else if(TextUtils.isEmpty(Password)){
+                if(TextUtils.isEmpty(Password)){
                     password.setError("Fill password field");
                     password.requestFocus();
                     return;
                 }
-                else if(Password.length()<6)
+                if(Password.length()<6)
                 {
                     password.setError("Password length is <6");
                     password.requestFocus();
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(HomeActivity.this, "User Login Successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(HomeActivity.this, botton_nav.class));
                             } else {
-                                Toast.makeText(HomeActivity.this, "User Login UnSuccessfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HomeActivity.this, "Please Register First!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -82,7 +82,7 @@ public class PoseGraphic extends Graphic {
     leftPaint.setColor(Color.GREEN);
     rightPaint = new Paint();
     rightPaint.setStrokeWidth(STROKE_WIDTH);
-    rightPaint.setColor(Color.YELLOW);
+    rightPaint.setColor(Color.RED);
   }
 
   @Override
@@ -112,6 +112,7 @@ public class PoseGraphic extends Graphic {
         zMax = max(zMax, landmark.getPosition3D().getZ());
       }
     }
+
     ArrayList<PoseLandmark> points= new ArrayList<>();
     PoseLandmark leftShoulder = pose.getPoseLandmark(PoseLandmark.LEFT_SHOULDER);
     points.add(leftShoulder);
@@ -132,64 +133,65 @@ public class PoseGraphic extends Graphic {
 
 
     PoseLandmark nose = pose.getPoseLandmark(PoseLandmark.NOSE);
-    points.add(nose);
+    //points.add(nose);
     PoseLandmark lefyEyeInner = pose.getPoseLandmark(PoseLandmark.LEFT_EYE_INNER);
-    points.add(lefyEyeInner);
+    //points.add(lefyEyeInner);
     PoseLandmark lefyEye = pose.getPoseLandmark(PoseLandmark.LEFT_EYE);
-    points.add(lefyEye);
+    //points.add(lefyEye);
     PoseLandmark leftEyeOuter = pose.getPoseLandmark(PoseLandmark.LEFT_EYE_OUTER);
-    points.add(leftEyeOuter);
+    //points.add(leftEyeOuter);
     PoseLandmark rightEyeInner = pose.getPoseLandmark(PoseLandmark.RIGHT_EYE_INNER);
-    points.add(rightEyeInner);
+    //points.add(rightEyeInner);
     PoseLandmark rightEye = pose.getPoseLandmark(PoseLandmark.RIGHT_EYE);
-    points.add(rightEye);
+    //points.add(rightEye);
     PoseLandmark rightEyeOuter = pose.getPoseLandmark(PoseLandmark.RIGHT_EYE_OUTER);
-    points.add(rightEyeOuter);
+    //points.add(rightEyeOuter);
     PoseLandmark leftEar = pose.getPoseLandmark(PoseLandmark.LEFT_EAR);
-    points.add(leftEar);
+    //points.add(leftEar);
     PoseLandmark rightEar = pose.getPoseLandmark(PoseLandmark.RIGHT_EAR);
-    points.add(rightEar);
+    //points.add(rightEar);
     PoseLandmark leftMouth = pose.getPoseLandmark(PoseLandmark.LEFT_MOUTH);
-    points.add(leftMouth);
+    //points.add(leftMouth);
     PoseLandmark rightMouth = pose.getPoseLandmark(PoseLandmark.RIGHT_MOUTH);
-    points.add(rightMouth);
+    //points.add(rightMouth);
     PoseLandmark leftKnee = pose.getPoseLandmark(PoseLandmark.LEFT_KNEE);
-    points.add(leftKnee);
+    //points.add(leftKnee);
     PoseLandmark rightKnee = pose.getPoseLandmark(PoseLandmark.RIGHT_KNEE);
-    points.add(rightKnee);
+    //points.add(rightKnee);
     PoseLandmark leftAnkle = pose.getPoseLandmark(PoseLandmark.LEFT_ANKLE);
-    points.add(leftAnkle);
+    //points.add(leftAnkle);
     PoseLandmark rightAnkle = pose.getPoseLandmark(PoseLandmark.RIGHT_ANKLE);
-    points.add(rightAnkle);
+    //points.add(rightAnkle);
     PoseLandmark leftPinky = pose.getPoseLandmark(PoseLandmark.LEFT_PINKY);
-    points.add(leftPinky);
+    //points.add(leftPinky);
     PoseLandmark rightPinky = pose.getPoseLandmark(PoseLandmark.RIGHT_PINKY);
-    points.add(rightPinky);
+    //points.add(rightPinky);
     PoseLandmark leftIndex = pose.getPoseLandmark(PoseLandmark.LEFT_INDEX);
-    points.add(leftIndex);
+    //points.add(leftIndex);
     PoseLandmark rightIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_INDEX);
-    points.add(rightIndex);
+    //points.add(rightIndex);
     PoseLandmark leftThumb = pose.getPoseLandmark(PoseLandmark.LEFT_THUMB);
-    points.add(leftThumb);
+    //points.add(leftThumb);
     PoseLandmark rightThumb = pose.getPoseLandmark(PoseLandmark.RIGHT_THUMB);
-    points.add(rightThumb);
+    //points.add(rightThumb);
     PoseLandmark leftHeel = pose.getPoseLandmark(PoseLandmark.LEFT_HEEL);
-    points.add(leftHeel);
+    //points.add(leftHeel);
     PoseLandmark rightHeel = pose.getPoseLandmark(PoseLandmark.RIGHT_HEEL);
-    points.add(rightHeel);
+    //points.add(rightHeel);
     PoseLandmark leftFootIndex = pose.getPoseLandmark(PoseLandmark.LEFT_FOOT_INDEX);
-    points.add(leftFootIndex);
+    //points.add(leftFootIndex);
     PoseLandmark rightFootIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_FOOT_INDEX);
-    points.add(rightFootIndex);
+    //points.add(rightFootIndex);
     BicepCurl obj= new BicepCurl(points,canvas,leftPaint);
-    boolean flag= obj.processAngels();
+    boolean flag=false;
+    flag= obj.processAngels();
 
     // Face
-    drawLine(canvas, nose, lefyEyeInner, whitePaint);
-    drawLine(canvas, lefyEyeInner, lefyEye, whitePaint);
-    drawLine(canvas, lefyEye, leftEyeOuter, whitePaint);
-    drawLine(canvas, leftEyeOuter, leftEar, whitePaint);
-    drawLine(canvas, nose, rightEyeInner, whitePaint);
+    drawLine(canvas, nose, lefyEyeInner, leftPaint);
+    drawLine(canvas, lefyEyeInner, lefyEye, leftPaint);
+    drawLine(canvas, lefyEye, leftEyeOuter, leftPaint);
+    drawLine(canvas, leftEyeOuter, leftEar, leftPaint);
+    drawLine(canvas, nose, rightEyeInner, leftPaint);
     drawLine(canvas, rightEyeInner, rightEye, whitePaint);
     drawLine(canvas, rightEye, rightEyeOuter, whitePaint);
     drawLine(canvas, rightEyeOuter, rightEar, whitePaint);
@@ -199,30 +201,51 @@ public class PoseGraphic extends Graphic {
     drawLine(canvas, leftHip, rightHip, whitePaint);
 
     // Left body
-    drawLine(canvas, leftShoulder, leftElbow, leftPaint);
-    drawLine(canvas, leftElbow, leftWrist, leftPaint);
-    drawLine(canvas, leftShoulder, leftHip, leftPaint);
-    drawLine(canvas, leftHip, leftKnee, leftPaint);
-    drawLine(canvas, leftKnee, leftAnkle, leftPaint);
-    drawLine(canvas, leftWrist, leftThumb, leftPaint);
-    drawLine(canvas, leftWrist, leftPinky, leftPaint);
-    drawLine(canvas, leftWrist, leftIndex, leftPaint);
-    drawLine(canvas, leftIndex, leftPinky, leftPaint);
-    drawLine(canvas, leftAnkle, leftHeel, leftPaint);
-    drawLine(canvas, leftHeel, leftFootIndex, leftPaint);
+    if(flag ==false)
+    {
+      drawLine(canvas, leftShoulder, leftElbow, leftPaint);
+      drawLine(canvas, leftElbow, leftWrist, leftPaint);
+      drawLine(canvas, leftShoulder, leftHip, leftPaint);
+      drawLine(canvas, rightShoulder, rightElbow, leftPaint);
+      drawLine(canvas, rightElbow, rightWrist, leftPaint);
+      drawLine(canvas, rightShoulder, rightHip, leftPaint);
+
+    }
+    else if(flag==true)
+    {
+      drawLine(canvas, leftShoulder, leftElbow, rightPaint);
+      drawLine(canvas, leftElbow, leftWrist, rightPaint);
+      drawLine(canvas, leftShoulder, leftHip, rightPaint);
+
+      drawLine(canvas, rightShoulder, rightElbow, rightPaint);
+      drawLine(canvas, rightElbow, rightWrist, rightPaint);
+      drawLine(canvas, rightShoulder, rightHip, rightPaint);
+    }
+
+    /*drawLine(canvas, leftShoulder, leftElbow, whitePaint);
+    drawLine(canvas, leftElbow, leftWrist, whitePaint);
+    drawLine(canvas, leftShoulder, leftHip, whitePaint);
+    */drawLine(canvas, leftHip, leftKnee, whitePaint);
+    drawLine(canvas, leftKnee, leftAnkle, whitePaint);
+    drawLine(canvas, leftWrist, leftThumb, whitePaint);
+    drawLine(canvas, leftWrist, leftPinky, whitePaint);
+    drawLine(canvas, leftWrist, leftIndex, whitePaint);
+    drawLine(canvas, leftIndex, leftPinky, whitePaint);
+    drawLine(canvas, leftAnkle, leftHeel, whitePaint);
+    drawLine(canvas, leftHeel, leftFootIndex, whitePaint);
 
     // Right body
-    drawLine(canvas, rightShoulder, rightElbow, rightPaint);
-    drawLine(canvas, rightElbow, rightWrist, rightPaint);
-    drawLine(canvas, rightShoulder, rightHip, rightPaint);
-    drawLine(canvas, rightHip, rightKnee, rightPaint);
-    drawLine(canvas, rightKnee, rightAnkle, rightPaint);
-    drawLine(canvas, rightWrist, rightThumb, rightPaint);
-    drawLine(canvas, rightWrist, rightPinky, rightPaint);
-    drawLine(canvas, rightWrist, rightIndex, rightPaint);
-    drawLine(canvas, rightIndex, rightPinky, rightPaint);
-    drawLine(canvas, rightAnkle, rightHeel, rightPaint);
-    drawLine(canvas, rightHeel, rightFootIndex, rightPaint);
+   /* drawLine(canvas, rightShoulder, rightElbow, whitePaint);
+    drawLine(canvas, rightElbow, rightWrist, whitePaint);
+    drawLine(canvas, rightShoulder, rightHip, whitePaint);
+   */ drawLine(canvas, rightHip, rightKnee, whitePaint);
+    drawLine(canvas, rightKnee, rightAnkle, whitePaint);
+    drawLine(canvas, rightWrist, rightThumb, whitePaint);
+    drawLine(canvas, rightWrist, rightPinky, whitePaint);
+    drawLine(canvas, rightWrist, rightIndex, whitePaint);
+    drawLine(canvas, rightIndex, rightPinky, whitePaint);
+    drawLine(canvas, rightAnkle, rightHeel, whitePaint);
+    drawLine(canvas, rightHeel, rightFootIndex, whitePaint);
 
     // Draw inFrameLikelihood for all points
     if (showInFrameLikelihood) {

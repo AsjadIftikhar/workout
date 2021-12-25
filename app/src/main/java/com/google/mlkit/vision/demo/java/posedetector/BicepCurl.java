@@ -73,54 +73,33 @@ public class BicepCurl {
 
         if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
             stopFlag= true;
-            canvas.drawText("You are flaring out", 120,400,paint);
+            canvas.drawText("You are flaring out", 120,350,paint);
             stage="up";
-      /*      Log.d("ADebugTag", "Stage is: " + stage);
-            Log.d("ADebugTag", "Stop Flag is " + Boolean.toString(stopFlag));
-      */  }
+        }
         else{
             stopFlag =false;
-/*
-            Log.d("ADebugTag", "Stop Flag is " + Boolean.toString(stopFlag));
-            Log.d("ADebugTag", "Stage is: " + stage);
-*/
 
         }
         if(stopFlag==false && left_angle_for_curl>160 && right_angle_for_curl>160){
             stage="down";
-/*
-            Log.d("ADebugTag", "Stage is: " + stage);
-            Log.d("ADebugTag", "Stop Flag is " + Boolean.toString(stopFlag));
-*/
 
         }
         if(ratioL <0.47 && ratioR<0.49) {
             stopFlag = true;
             stage = "up";
-          /*  Log.d("ADebugTag", "Stage is: " + stage);
-            Log.d("ADebugTag", "Stop Flag is " + Boolean.toString(stopFlag));
-*/
-            canvas.drawText("Elbows are moving", 120, 400, paint);
+            canvas.drawText("Elbows are moving", 120, 550, paint);
         }
 
         if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
             stage="up";
             counter=counter+1;
-            /*Log.d("ADebugTag", "Stage is: " + stage);
-            Log.d("ADebugTag", "Stop Flag is " + Boolean.toString(stopFlag));
-            Log.d("ADebugTag", "Counter is: " + Integer.toString(counter));
-*/
         }
-        canvas.drawText("Counter: "+ Integer.toString(counter), 40,40,paint);
+        canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
         Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
         Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
 
 
-        //Log.i(leftValues.getX())
-        //Log.d("ADebugTag", "ValueX: " + Float.toString(leftValues.getX()));
-        //Log.d("ADebugTag", "ValueY: " + Float.toString(leftValues.getY()));
-
-        return true;
+        return stopFlag;
     }
 
 
