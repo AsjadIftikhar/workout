@@ -27,7 +27,7 @@
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
-        android:icon="@drawable/ic_dumbbell"
+        android:icon="@drawable/ic_black_dumbell"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat" >
 

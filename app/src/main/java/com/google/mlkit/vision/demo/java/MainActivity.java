@@ -10,12 +10,13 @@ import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.botton_nav;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override

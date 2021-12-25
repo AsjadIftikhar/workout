@@ -36,7 +36,7 @@ public class RegistrationActivity extends AppCompatActivity {
         height=findViewById(R.id.tv_height);
         weight=findViewById(R.id.tv_weight);
         register_button=findViewById(R.id.btn_register);
-
+        getSupportActionBar().hide();
         mAuth=FirebaseAuth.getInstance();
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +111,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     }
                                 });
                                 startActivity(new Intent(RegistrationActivity.this,HomeActivity.class));
+                                finish();
                             }else{
                                 Toast.makeText(RegistrationActivity.this,"User Not Registered",Toast.LENGTH_SHORT).show();
 

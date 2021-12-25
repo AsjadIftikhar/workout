@@ -31,7 +31,7 @@ public class edit_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        getSupportActionBar().hide();
         prof_name = findViewById(R.id.prof_name);
         prof_email = findViewById(R.id.prof_email);
         prof_age = findViewById(R.id.prof_age);
@@ -59,8 +59,8 @@ public class edit_profile extends AppCompatActivity {
                     String password=userProfile.getPassword();
                     prof_name.setText(name);
                     prof_email.setText(email);
-                    prof_age.setText(age);
-                    prof_height.setText(height);
+                    prof_age.setText("Age "+age);
+                    prof_height.setText("Height "+height);
                     prof_status.setText("Welcome "+name );
 
                     prof_update.setOnClickListener(new View.OnClickListener() {
