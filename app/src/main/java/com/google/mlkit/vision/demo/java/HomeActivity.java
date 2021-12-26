@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ import com.google.mlkit.vision.demo.botton_nav;
 public class HomeActivity extends AppCompatActivity {
     EditText email,password;
     Button login_button,signup_button;
+    ProgressBar progressBar;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         password=findViewById(R.id.tv_person_password);
         login_button=findViewById(R.id.btn_login);
         signup_button=findViewById(R.id.btn_signup);
-
+        progressBar=findViewById(R.id.progressbar_login);
         mAuth=FirebaseAuth.getInstance();
         //FirebaseUser user=mAuth.getCurrentUser();
         if(mAuth.getCurrentUser()!=null){
@@ -46,25 +48,30 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
+                progressBar.setVisibility(View.VISIBLE);
                 if(TextUtils.isEmpty(Email)){
                     email.setError("Fill Email field");
                     email.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
                     email.setError("Please enter a valid Email");
                     email.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Password)){
                     password.setError("Fill password field");
                     password.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(Password.length()<6)
                 {
                     password.setError("Password length is <6");
                     password.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else {
