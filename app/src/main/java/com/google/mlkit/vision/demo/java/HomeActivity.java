@@ -81,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(HomeActivity.this, "User Login Successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(HomeActivity.this, botton_nav.class));
+                                finish();
                             } else {
                                 Toast.makeText(HomeActivity.this, "Please Register First!", Toast.LENGTH_SHORT).show();
                             }
