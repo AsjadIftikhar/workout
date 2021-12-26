@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class edit_profile extends AppCompatActivity {
     Button prof_update;
     EditText prof_name, prof_email, prof_age, prof_height, prof_pass, prof_new_pass;
     TextView prof_status;
+    ProgressBar progressBar;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -41,6 +43,8 @@ public class edit_profile extends AppCompatActivity {
 
         prof_status = findViewById(R.id.prof_status);
         prof_update = findViewById(R.id.pass_update);
+
+        progressBar=findViewById(R.id.progressbar_profile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference("Users");
@@ -62,7 +66,7 @@ public class edit_profile extends AppCompatActivity {
                     prof_age.setText("Age "+age);
                     prof_height.setText("Height "+height);
                     prof_status.setText("Welcome "+name );
-
+                    progressBar.setVisibility(View.INVISIBLE);
                     prof_update.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
