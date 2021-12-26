@@ -7,16 +7,17 @@
     tools:context=".java.MainActivity"
     android:background="@drawable/ic_google_pixel_5___1">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="106dp"
-        android:layout_height="99dp"
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gif_dumbell"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432"
-        app:srcCompat="@drawable/ic_dumbbell" />
+        app:layout_constraintVertical_bias="0.354" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
