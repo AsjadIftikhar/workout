@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText name,email,password,age,height,weight;
     Button register_button;
     FirebaseAuth mAuth;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class RegistrationActivity extends AppCompatActivity {
         height=findViewById(R.id.tv_height);
         weight=findViewById(R.id.tv_weight);
         register_button=findViewById(R.id.btn_register);
+        progressBar=findViewById(R.id.progressbar_register);
         getSupportActionBar().hide();
         mAuth=FirebaseAuth.getInstance();
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -47,45 +49,55 @@ public class RegistrationActivity extends AppCompatActivity {
                 String Age=age.getText().toString().trim();
                 String Height=height.getText().toString().trim();
                 String Weight=weight.getText().toString().trim();
+                progressBar.setVisibility(View.VISIBLE);
+
 
                 if(TextUtils.isEmpty(Name)){
                     name.setError("Fill Name field");
                     name.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Email)){
                     email.setError("Fill Email field");
                     email.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
                     email.setError("Please enter a valid Email");
                     email.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Password)){
                     password.setError("Fill password field");
                     password.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if (Password.length()<6){
                     password.setError("Password length is <6");
                     password.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Age)){
                     age.setError("Fill Age field");
                     age.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Height)){
                     height.setError("Fill Height field");
                     height.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if(TextUtils.isEmpty(Weight)){
                     weight.setError("Fill Weight field");
                     weight.requestFocus();
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
 

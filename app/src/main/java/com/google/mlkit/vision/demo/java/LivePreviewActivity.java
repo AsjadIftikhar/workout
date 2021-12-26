@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaParser;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
@@ -49,13 +51,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Live preview demo for ML Kit APIs. */
 @KeepName
 public final class LivePreviewActivity extends AppCompatActivity
     implements OnRequestPermissionsResultCallback,
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
-  private static final String POSE_DETECTION = "Pose Detection";
+  private static final String POSE_DETECTION = "BICEP CURLS";
 
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
@@ -65,6 +66,8 @@ public final class LivePreviewActivity extends AppCompatActivity
   private GraphicOverlay graphicOverlay;
   private String selectedModel = POSE_DETECTION;
 
+  private MediaPlayer mMediaplayer;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -72,6 +75,9 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     setContentView(R.layout.activity_vision_live_preview);
 
+    mMediaplayer=MediaPlayer.create(this,R.raw.music);
+
+    mMediaplayer.start();
     preview = findViewById(R.id.preview_view);
     if (preview == null) {
       Log.d(TAG, "Preview is null");
@@ -100,6 +106,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     ImageView settingsButton = findViewById(R.id.settings_button);
     settingsButton.setOnClickListener(
         v -> {
+          mMediaplayer.pause();
           Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
           intent.putExtra(
               SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
@@ -110,6 +117,13 @@ public final class LivePreviewActivity extends AppCompatActivity
       createCameraSource(selectedModel);
     } else {
       getRuntimePermissions();
+    }
+  }
+
+  private void releaseMediaPlayer(){
+    if(mMediaplayer!=null){
+      mMediaplayer.release();
+      mMediaplayer=null;
     }
   }
 
@@ -148,7 +162,6 @@ public final class LivePreviewActivity extends AppCompatActivity
   }
 
   private void createCameraSource(String model) {
-    // If there's no existing cameraSource, create one.
     if (cameraSource == null) {
       cameraSource = new CameraSource(this, graphicOverlay);
     }
@@ -187,11 +200,6 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
-  /**
-   * Starts or restarts the camera source, if it exists. If the camera source doesn't exist yet
-   * (e.g., because onResume was called before the camera source was created), this will be called
-   * again when the camera source is created.
-   */
   private void startCameraSource() {
     if (cameraSource != null) {
       try {
@@ -216,6 +224,9 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.d(TAG, "onResume");
     createCameraSource(selectedModel);
     startCameraSource();
+    if(mMediaplayer!= null){
+      mMediaplayer.start();
+    }
   }
 
   /** Stops the camera. */
@@ -223,6 +234,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   protected void onPause() {
     super.onPause();
     preview.stop();
+    if(mMediaplayer!= null){
+      mMediaplayer.pause();
+    }
   }
 
   @Override
@@ -231,6 +245,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     if (cameraSource != null) {
       cameraSource.release();
     }
+    releaseMediaPlayer();
   }
 
   private String[] getRequiredPermissions() {

@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Fahad Ashfaq/AndroidStudioProjects/workout/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/drawable/custom_buttons.xml" value="0.22179487179487178" />
+        <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.23378378378378378" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout-land/activity_vision_camerax_live_preview.xml" value="0.1517094017094017" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout-land/activity_vision_cameraxsource_demo.xml" value="0.1576923076923077" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_bmi_calculation.xml" value="0.264" />
@@ -14,16 +15,17 @@
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_main.xml" value="0.136" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_profile.xml" value="0.176" />
-        <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_registration.xml" value="0.2" />
+        <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_registration.xml" value="0.152" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_settings.xml" value="0.13080601092896174" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_vision_camerax_live_preview.xml" value="0.1671195652173913" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/activity_vision_cameraxsource_demo.xml" value="0.1671195652173913" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/fragment_home.xml" value="0.26031746031746034" />
-        <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/fragment_live.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/fragment_live.xml" value="0.152" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/layout/fragment_profile.xml" value="0.152" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/menu/camera_button_menu.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/menu/navigation_menu.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Hamza/AndroidStudioProjects/workout/app/src/main/res/xml/preference_live_preview_quickstart.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/Hamza/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.16052631578947368" />
       </map>
     </option>
   </component>
