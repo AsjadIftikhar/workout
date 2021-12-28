@@ -8,190 +8,188 @@
     android:background="@drawable/ic_iphone_12_pro_max___11">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_dumbbell" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="340dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="30dp"
+            android:text="Digital Workout"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_dumbbell" />
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="307dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Digital Workout"
-                    android:textAlignment="center"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.512"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="246dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="20dp"
+        android:text="Registration"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-            </LinearLayout>
+    <EditText
+        android:id="@+id/tv_name"
+        android:layout_width="355dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="283dp"
-                android:layout_height="68dp"
-                android:layout_marginLeft="100dp"
-                android:paddingLeft="20dp"
-                android:text="Registration"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <EditText
-                android:id="@+id/tv_name"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/custom_editview"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName"
-                android:paddingLeft="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
+    <EditText
+        android:id="@+id/tv_email"
+        android:layout_width="355dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
 
-                android:textSize="20dp" />
-            <EditText
-                android:id="@+id/tv_email"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:textColorHint="#000000"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:paddingLeft="20dp"
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-                android:background="@drawable/custom_editview"
-                />
-            <EditText
-                android:id="@+id/tv_password"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Password"
-                android:textColorHint="#000000"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:paddingLeft="20dp"
+    <EditText
+        android:id="@+id/tv_Age"
+        android:layout_width="355dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
 
-                android:background="@drawable/custom_editview"
-                />
-            <EditText
-                android:id="@+id/tv_Age"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:ems="10"
-                android:inputType="number"
-                android:hint="Age"
-                android:textColorHint="#000000"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:paddingLeft="20dp"
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
-                android:background="@drawable/custom_editview"
-                />
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="103dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="148dp"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        android:background="@drawable/custom_buttons"
+        android:text="Register"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:backgroundTint="#FFFFFF"
+        app:iconTint="#DEE1F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
-                <EditText
-                    android:id="@+id/tv_height"
-                    android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/custom_editview"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:paddingLeft="20dp"
-                    android:hint="Height in cm"
-                    android:textColorHint="#000000"
-                    android:textSize="18dp"
-                    android:textColor="#000000"/>
-                <EditText
-                    android:id="@+id/tv_weight"
-                    android:layout_width="130dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="90dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/custom_editview"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:paddingLeft="20dp"
-                    android:hint="Weight in KG"
-                    android:textColorHint="#000000"
-                    android:textSize="18dp"
-                    android:textColor="#000000"
-                     />
-            </LinearLayout>
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_width="108dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="68dp"
-                android:layout_marginLeft="150dp"
-                android:background="@drawable/custom_buttons"
+    <ProgressBar
+        android:id="@+id/progressbar_register"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
-                android:text="Register"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                app:backgroundTint="#FFFFFF"
-                app:iconTint="#DEE1F4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+    <EditText
+        android:id="@+id/tv_height"
+        android:layout_width="140dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Height in cm"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_register"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="180dp"
-                android:visibility="invisible" />
+    <EditText
+        android:id="@+id/tv_weight"
+        android:layout_width="140dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Weight in KG"
+        android:inputType="number"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
+    <EditText
+        android:id="@+id/tv_password"
+        android:layout_width="355dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_editview"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
 
-        </LinearLayout>
-    </ScrollView>
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Age" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
