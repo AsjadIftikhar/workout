@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.mlkit.vision.demo.java.BMI_calculation;
 import com.google.mlkit.vision.demo.java.HomeActivity;
+import com.google.mlkit.vision.demo.java.WorkoutHome;
 import com.google.mlkit.vision.demo.java.edit_profile;
 
 
@@ -20,6 +21,7 @@ public class ProfileFragment extends Fragment {
 
     Button sign_out;
     Button profile_page;
+    Button history_page;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -52,6 +54,16 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        history_page=view.findViewById(R.id.bth_history);
+        history_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), WorkoutHome.class);
+                startActivity(intent);
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }

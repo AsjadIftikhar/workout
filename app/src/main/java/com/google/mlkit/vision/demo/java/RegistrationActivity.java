@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.vision.demo.R;
 
@@ -30,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        name=findViewById(R.id.tv_name);
+        name=findViewById(R.id.workoutName);
         email=findViewById(R.id.tv_email);
         password=findViewById(R.id.tv_password);
         age=findViewById(R.id.tv_Age);

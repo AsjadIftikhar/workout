@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <EditText
-        android:id="@+id/tv_name"
+        android:id="@+id/workoutName"
         android:layout_width="345dp"
         android:layout_height="62dp"
         android:layout_marginStart="8dp"
@@ -94,7 +94,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
     <EditText
         android:id="@+id/tv_Age"

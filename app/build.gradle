@@ -67,4 +67,6 @@ dependencies {
 
     //gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
 }

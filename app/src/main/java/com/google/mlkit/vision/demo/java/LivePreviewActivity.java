@@ -22,7 +22,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaParser;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -38,16 +42,25 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import com.google.android.gms.common.annotation.KeepName;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.common.model.LocalModel;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.java.posedetector.BicepCurl;
 import com.google.mlkit.vision.demo.java.posedetector.PoseDetectorProcessor;
+import com.google.mlkit.vision.demo.java.posedetector.Workout;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
 import com.google.mlkit.vision.pose.PoseDetectorOptionsBase;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +70,6 @@ public final class LivePreviewActivity extends AppCompatActivity
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
   private static final String POSE_DETECTION = "BICEP CURLS";
-
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
 
@@ -239,11 +251,30 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onDestroy() {
     super.onDestroy();
     if (cameraSource != null) {
       cameraSource.release();
+      Log.d("ADebugTag", "Counter issssssssssssssss: " + Integer.toString(BicepCurl.counter));
+      //BicepCurl.counter
+      Workout wObj= new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+      DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history");
+      String key = dOBJ.push().getKey();
+
+      dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                 @Override
+                                                 public void onSuccess(@NonNull Void unused) {
+                                                   Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                                                }
+                                               }
+      ).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+          Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+        }
+      });
     }
     releaseMediaPlayer();
   }
@@ -306,4 +337,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.i(TAG, "Permission NOT granted: " + permission);
     return false;
   }
+
+
+
 }

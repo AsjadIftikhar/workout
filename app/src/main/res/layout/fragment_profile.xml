@@ -11,6 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/bth_history"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_buttons"
+            android:drawableStart="@drawable/ic_calculator"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="History"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+
+            android:textStyle="bold"
+            app:backgroundTint="#CF505F"
+            app:iconTint="#DEE1F4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.549"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_profile_activity" />
+
         <LinearLayout
             android:id="@+id/pageIDlayout"
             android:layout_width="match_parent"
@@ -53,7 +75,7 @@
             android:id="@+id/btn_signout"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/custom_buttons"
             android:drawableStart="@drawable/ic_logout"
             android:paddingLeft="10dp"
@@ -63,18 +85,19 @@
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:backgroundTint="#CF505F"
 
+            app:backgroundTint="#CF505F"
             app:iconTint="#DEE1F4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_profile_activity" />
+            app:layout_constraintTop_toBottomOf="@+id/bth_history" />
 
         <Button
             android:id="@+id/btn_profile_activity"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/custom_buttons"
             android:drawableStart="@drawable/ic_profile"
             android:paddingLeft="10dp"
@@ -88,6 +111,7 @@
 
             app:iconTint="#DEE1F4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pageIDlayout" />
 
@@ -97,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:src="@drawable/gif_deadlift"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_signout" />
