@@ -26,6 +26,7 @@ import com.google.common.primitives.Ints;
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.GraphicOverlay.Graphic;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseLandmark;
 
@@ -35,7 +36,7 @@ import java.util.Locale;
 
 /** Draw the detected pose in preview. */
 public class PoseGraphic extends Graphic {
-
+  LivePreviewActivity LiveActivity;
   private static final float DOT_RADIUS = 8.0f;
   private static final float IN_FRAME_LIKELIHOOD_TEXT_SIZE = 30.0f;
   private static final float STROKE_WIDTH = 10.0f;
@@ -184,6 +185,7 @@ public class PoseGraphic extends Graphic {
     //points.add(rightFootIndex);
     BicepCurl obj= new BicepCurl(points,canvas,leftPaint);
     boolean flag=false;
+
     flag= obj.processAngels();
 
     // Face
@@ -222,10 +224,7 @@ public class PoseGraphic extends Graphic {
       drawLine(canvas, rightShoulder, rightHip, rightPaint);
     }
 
-    /*drawLine(canvas, leftShoulder, leftElbow, whitePaint);
-    drawLine(canvas, leftElbow, leftWrist, whitePaint);
-    drawLine(canvas, leftShoulder, leftHip, whitePaint);
-    */drawLine(canvas, leftHip, leftKnee, whitePaint);
+    drawLine(canvas, leftHip, leftKnee, whitePaint);
     drawLine(canvas, leftKnee, leftAnkle, whitePaint);
     drawLine(canvas, leftWrist, leftThumb, whitePaint);
     drawLine(canvas, leftWrist, leftPinky, whitePaint);
@@ -235,10 +234,7 @@ public class PoseGraphic extends Graphic {
     drawLine(canvas, leftHeel, leftFootIndex, whitePaint);
 
     // Right body
-   /* drawLine(canvas, rightShoulder, rightElbow, whitePaint);
-    drawLine(canvas, rightElbow, rightWrist, whitePaint);
-    drawLine(canvas, rightShoulder, rightHip, whitePaint);
-   */ drawLine(canvas, rightHip, rightKnee, whitePaint);
+    drawLine(canvas, rightHip, rightKnee, whitePaint);
     drawLine(canvas, rightKnee, rightAnkle, whitePaint);
     drawLine(canvas, rightWrist, rightThumb, whitePaint);
     drawLine(canvas, rightWrist, rightPinky, whitePaint);

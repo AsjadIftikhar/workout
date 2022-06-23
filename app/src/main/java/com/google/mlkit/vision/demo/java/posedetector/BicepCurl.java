@@ -16,13 +16,14 @@ public class BicepCurl {
     Paint paint;
     static boolean stopFlag = false;
     static String stage="down";
-    static int counter=0;
+    public static int counter=0;
     public BicepCurl(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
         paint=color;
         paint.setTextSize(100f);
     }
+
     public double calculateAngles(PointF3D first, PointF3D second, PointF3D third){
         double temp1= Math.atan2(third.getY()-second.getY(), third.getX()- second.getX());
         double temp2= Math.atan2(first.getY()-second.getY(), first.getX()- second.getX());
@@ -62,7 +63,6 @@ public class BicepCurl {
         //Log.d("ADebugTag", "left Angel for Tuck: " + Double.toString(left_angle_for_tuck));
         double right_angle_for_curl=calculateAngles(rightShoulderValues,rightElbowValues,rightWristValues);
         double right_angle_for_tuck=calculateAngles(rightHipValues,rightShoulderValues,rightElbowValues);
-        //Log.d("ADebugTag", "Right Angel for Tuck: " + Double.toString(right_angle_for_tuck));
         double distance_shoulder_elbow_left=(leftElbowValues.getY()-leftShoulderValues.getY());
         double distance_hip_shoulder_left=(leftHipValues.getY()-leftShoulderValues.getY());
         double distance_shoulder_elbow_right=(rightElbowValues.getY()-rightShoulderValues.getY());
