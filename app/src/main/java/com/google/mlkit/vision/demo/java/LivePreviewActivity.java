@@ -16,6 +16,7 @@
 
 package com.google.mlkit.vision.demo.java;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -28,12 +29,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -54,6 +59,8 @@ import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.posedetector.BicepCurl;
 import com.google.mlkit.vision.demo.java.posedetector.PoseDetectorProcessor;
+import com.google.mlkit.vision.demo.java.posedetector.ShoulderPress;
+import com.google.mlkit.vision.demo.java.posedetector.Squats;
 import com.google.mlkit.vision.demo.java.posedetector.Workout;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
@@ -69,17 +76,27 @@ public final class LivePreviewActivity extends AppCompatActivity
     implements OnRequestPermissionsResultCallback,
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
-  private static final String POSE_DETECTION = "BICEP CURLS";
+  private static final String BICEP_CURL = "BICEP CURLS";
+  private static final String SQUATS = "SQUATS";
+  private static final String SHOULDER_PRESS = "SHOULDER PRESS";
+
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
-
+  public static int selectedExercise= -1;
   private CameraSource cameraSource = null;
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
-  private String selectedModel = POSE_DETECTION;
-
+  private String selectedModel = BICEP_CURL;
   private MediaPlayer mMediaplayer;
+  private AlertDialog.Builder dialogBuilder;
+  private AlertDialog dialog;
+  private EditText numberOfSets, numberOfReps;
+  private Button Continue;
+  public static int numOfSets=-1;
+  public static int numOfReps=-1;
 
+
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -101,9 +118,12 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     Spinner spinner = findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
-    options.add(POSE_DETECTION);
+    options.add(BICEP_CURL);
+    options.add(SQUATS);
+    options.add(SHOULDER_PRESS);
+
 ///
-    options.add("Deadlift");
+    //options.add("Deadlift");
 
     // Creating adapter for spinner
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
@@ -131,6 +151,45 @@ public final class LivePreviewActivity extends AppCompatActivity
     } else {
       getRuntimePermissions();
     }
+
+    dialogBuilder = new AlertDialog.Builder(this);
+    final View setInfoView= getLayoutInflater().inflate(R.layout.popup, null);
+    numberOfSets= setInfoView.findViewById(R.id.setsInfo);
+    numberOfReps= setInfoView.findViewById(R.id.repsInSet);
+    Continue= (Button) setInfoView.findViewById(R.id.cont);
+
+    dialogBuilder.setView(setInfoView);
+    dialog= dialogBuilder.create();
+
+  }
+
+  public void getSetsInfo(){
+
+    dialog.show();
+      Continue.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        String sets=numberOfSets.getText().toString().trim();
+        String reps=numberOfReps.getText().toString().trim();
+
+        if(TextUtils.isEmpty(sets)){
+          numberOfSets.setError("Sets Required");
+          return;
+        }
+        else if(TextUtils.isEmpty(reps)){
+          numberOfReps.setError("Repetitions Required");
+          return;
+        }
+        else{
+          numOfSets=Integer.parseInt(sets);
+          numOfReps= Integer.parseInt(reps);
+          dialog.dismiss();
+        }
+      }
+    });
+
+
+
   }
 
   private void releaseMediaPlayer(){
@@ -140,6 +199,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public synchronized void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
     // An item was selected. You can retrieve the selected item using
@@ -174,6 +234,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     startCameraSource();
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   private void createCameraSource(String model) {
     if (cameraSource == null) {
       cameraSource = new CameraSource(this, graphicOverlay);
@@ -181,25 +242,165 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     try {
       switch (model) {
-          case POSE_DETECTION:
+        case BICEP_CURL: {
+          if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
+            Workout wObj= null;
+            if (selectedExercise==2) {
+              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+              Squats.counter=0;
+            }
+            else if (selectedExercise==3) {
+              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+              ShoulderPress.counter=0;
+            }
+
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            String key = dOBJ.push().getKey();
+
+            dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                  @Override
+                                                                  public void onSuccess(@NonNull Void unused) {
+                                                                    Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                                                                  }
+                                                                }
+            ).addOnFailureListener(new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+              }
+            });
+
+          }
+
+
+
+          selectedExercise =1;
+          getSetsInfo();
           PoseDetectorOptionsBase poseDetectorOptions =
-              PreferenceUtils.getPoseDetectorOptionsForLivePreview(this);
+                  PreferenceUtils.getPoseDetectorOptionsForLivePreview(this);
           Log.i(TAG, "Using Pose Detector with options " + poseDetectorOptions);
           boolean shouldShowInFrameLikelihood =
-              PreferenceUtils.shouldShowPoseDetectionInFrameLikelihoodLivePreview(this);
+                  PreferenceUtils.shouldShowPoseDetectionInFrameLikelihoodLivePreview(this);
           boolean visualizeZ = PreferenceUtils.shouldPoseDetectionVisualizeZ(this);
           boolean rescaleZ = PreferenceUtils.shouldPoseDetectionRescaleZForVisualization(this);
           boolean runClassification = PreferenceUtils.shouldPoseDetectionRunClassification(this);
           cameraSource.setMachineLearningFrameProcessor(
-              new PoseDetectorProcessor(
-                  this,
-                  poseDetectorOptions,
-                  shouldShowInFrameLikelihood,
-                  visualizeZ,
-                  rescaleZ,
-                  runClassification,
-                  /* isStreamMode = */ true));
+                  new PoseDetectorProcessor(
+                          this,
+                          poseDetectorOptions,
+                          shouldShowInFrameLikelihood,
+                          visualizeZ,
+                          rescaleZ,
+                          runClassification,
+                          /* isStreamMode = */ true));
           break;
+        }
+        case SQUATS: {
+          if(selectedExercise!=-1){
+            Workout wObj= null;
+            if (selectedExercise==1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0) ) {
+              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+              BicepCurl.counter=0;
+            }
+            else if (selectedExercise==3) {
+              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+              ShoulderPress.counter=0;
+            }
+
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            String key = dOBJ.push().getKey();
+
+            dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                  @Override
+                                                                  public void onSuccess(@NonNull Void unused) {
+                                                                    Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                                                                  }
+                                                                }
+            ).addOnFailureListener(new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+              }
+            });
+
+          }
+
+
+
+          selectedExercise =2;
+          getSetsInfo();
+          PoseDetectorOptionsBase poseDetectorOptions =
+                  PreferenceUtils.getPoseDetectorOptionsForLivePreview(this);
+          Log.i(TAG, "Using Pose Detector with options " + poseDetectorOptions);
+          boolean shouldShowInFrameLikelihood =
+                  PreferenceUtils.shouldShowPoseDetectionInFrameLikelihoodLivePreview(this);
+          boolean visualizeZ = PreferenceUtils.shouldPoseDetectionVisualizeZ(this);
+          boolean rescaleZ = PreferenceUtils.shouldPoseDetectionRescaleZForVisualization(this);
+          boolean runClassification = PreferenceUtils.shouldPoseDetectionRunClassification(this);
+          cameraSource.setMachineLearningFrameProcessor(
+                  new PoseDetectorProcessor(
+                          this,
+                          poseDetectorOptions,
+                          shouldShowInFrameLikelihood,
+                          visualizeZ,
+                          rescaleZ,
+                          runClassification,
+                          /* isStreamMode = */ true));
+          break;
+        }
+
+        case SHOULDER_PRESS: {
+
+          if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
+            Workout wObj= null;
+            if (selectedExercise==2) {
+              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+              Squats.counter=0;
+            }
+            else if (selectedExercise==1) {
+              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+              BicepCurl.counter=0;
+            }
+
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            String key = dOBJ.push().getKey();
+
+            dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                  @Override
+                                                                  public void onSuccess(@NonNull Void unused) {
+                                                                    Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                                                                  }
+                                                                }
+            ).addOnFailureListener(new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+              }
+            });
+
+          }
+          selectedExercise =3;
+          getSetsInfo();
+          PoseDetectorOptionsBase poseDetectorOptions =
+                  PreferenceUtils.getPoseDetectorOptionsForLivePreview(this);
+          Log.i(TAG, "Using Pose Detector with options " + poseDetectorOptions);
+          boolean shouldShowInFrameLikelihood =
+                  PreferenceUtils.shouldShowPoseDetectionInFrameLikelihoodLivePreview(this);
+          boolean visualizeZ = PreferenceUtils.shouldPoseDetectionVisualizeZ(this);
+          boolean rescaleZ = PreferenceUtils.shouldPoseDetectionRescaleZForVisualization(this);
+          boolean runClassification = PreferenceUtils.shouldPoseDetectionRunClassification(this);
+          cameraSource.setMachineLearningFrameProcessor(
+                  new PoseDetectorProcessor(
+                          this,
+                          poseDetectorOptions,
+                          shouldShowInFrameLikelihood,
+                          visualizeZ,
+                          rescaleZ,
+                          runClassification,
+                          /* isStreamMode = */ true));
+          break;
+        }
+
         default:
           Log.e(TAG, "Unknown model: " + model);
       }
@@ -231,6 +432,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onResume() {
     super.onResume();
@@ -260,22 +462,40 @@ public final class LivePreviewActivity extends AppCompatActivity
       cameraSource.release();
       Log.d("ADebugTag", "Counter issssssssssssssss: " + Integer.toString(BicepCurl.counter));
       //BicepCurl.counter
-      Workout wObj= new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
-      DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history");
-      String key = dOBJ.push().getKey();
 
-      dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                 @Override
-                                                 public void onSuccess(@NonNull Void unused) {
-                                                   Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
-                                                }
-                                               }
-      ).addOnFailureListener(new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-          Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+      if(BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0){
+        Workout wObj= null;
+        if (selectedExercise==1) {
+          wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+          BicepCurl.counter=0;
         }
-      });
+        else if (selectedExercise==2) {
+          wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+          Squats.counter=0;
+        }
+        else if (selectedExercise==3) {
+          wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+          ShoulderPress.counter=0;
+        }
+
+        DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+        String key = dOBJ.push().getKey();
+
+        dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                              @Override
+                                                              public void onSuccess(@NonNull Void unused) {
+                                                                Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                                                              }
+                                                            }
+        ).addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Toast.makeText(getApplicationContext(),"Failed!!",Toast.LENGTH_SHORT).show();
+          }
+        });
+
+      }
+
     }
     releaseMediaPlayer();
   }
@@ -319,6 +539,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {

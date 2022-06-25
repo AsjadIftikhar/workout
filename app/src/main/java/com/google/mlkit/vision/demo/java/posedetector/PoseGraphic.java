@@ -22,6 +22,10 @@ import static java.lang.Math.min;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.common.primitives.Ints;
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.demo.GraphicOverlay;
@@ -86,6 +90,7 @@ public class PoseGraphic extends Graphic {
     rightPaint.setColor(Color.RED);
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void draw(Canvas canvas) {
     List<PoseLandmark> landmarks = pose.getAllPoseLandmarks();
@@ -183,11 +188,28 @@ public class PoseGraphic extends Graphic {
     //points.add(leftFootIndex);
     PoseLandmark rightFootIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_FOOT_INDEX);
     //points.add(rightFootIndex);
-    BicepCurl obj= new BicepCurl(points,canvas,leftPaint);
-    boolean flag=false;
+    boolean flag = false;
+    if(LivePreviewActivity.selectedExercise==1) {
+      BicepCurl obj = new BicepCurl(points, canvas, leftPaint);
 
-    flag= obj.processAngels();
+      flag = obj.processAngels();
+    }
 
+    else if(LivePreviewActivity.selectedExercise==2) {
+      Squats obj = new Squats(points, canvas, leftPaint);
+
+      flag = obj.processAngels();
+    }
+
+    else if(LivePreviewActivity.selectedExercise==3) {
+      ShoulderPress obj = new ShoulderPress(points, canvas, leftPaint);
+
+      flag = obj.processAngels();
+    }
+    if (flag ==true){
+      //LiveActivity.onBackPressed();
+
+    }
     // Face
     drawLine(canvas, nose, lefyEyeInner, leftPaint);
     drawLine(canvas, lefyEyeInner, lefyEye, leftPaint);
@@ -202,9 +224,7 @@ public class PoseGraphic extends Graphic {
     drawLine(canvas, leftShoulder, rightShoulder, whitePaint);
     drawLine(canvas, leftHip, rightHip, whitePaint);
 
-    // Left body
-    if(flag ==false)
-    {
+
       drawLine(canvas, leftShoulder, leftElbow, leftPaint);
       drawLine(canvas, leftElbow, leftWrist, leftPaint);
       drawLine(canvas, leftShoulder, leftHip, leftPaint);
@@ -212,9 +232,6 @@ public class PoseGraphic extends Graphic {
       drawLine(canvas, rightElbow, rightWrist, leftPaint);
       drawLine(canvas, rightShoulder, rightHip, leftPaint);
 
-    }
-    else if(flag==true)
-    {
       drawLine(canvas, leftShoulder, leftElbow, rightPaint);
       drawLine(canvas, leftElbow, leftWrist, rightPaint);
       drawLine(canvas, leftShoulder, leftHip, rightPaint);
@@ -222,7 +239,7 @@ public class PoseGraphic extends Graphic {
       drawLine(canvas, rightShoulder, rightElbow, rightPaint);
       drawLine(canvas, rightElbow, rightWrist, rightPaint);
       drawLine(canvas, rightShoulder, rightHip, rightPaint);
-    }
+
 
     drawLine(canvas, leftHip, leftKnee, whitePaint);
     drawLine(canvas, leftKnee, leftAnkle, whitePaint);

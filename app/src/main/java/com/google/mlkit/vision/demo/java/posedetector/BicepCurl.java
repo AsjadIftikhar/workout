@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.util.Log;
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.demo.GraphicOverlay;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.mlkit.vision.pose.PoseLandmark;
 
 import java.lang.reflect.Array;
@@ -70,7 +71,7 @@ public class BicepCurl {
 
         double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
         double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
-
+        boolean flag=false;
         if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
             stopFlag= true;
             canvas.drawText("You are flaring out", 120,350,paint);
@@ -94,12 +95,15 @@ public class BicepCurl {
             stage="up";
             counter=counter+1;
         }
+        canvas.drawText("Sets: "+ Integer.toString(counter/LivePreviewActivity.numOfReps), 400,250,paint);
         canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
         Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
         Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
+        if(BicepCurl.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
+            return true;
+        }
 
-
-        return stopFlag;
+        return false;
     }
 
 
