@@ -163,6 +163,10 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   }
 
+  public static Context getContext() {
+    return LivePreviewActivity.getContext();
+  }
+
   public void getSetsInfo(){
 
     dialog.show();
