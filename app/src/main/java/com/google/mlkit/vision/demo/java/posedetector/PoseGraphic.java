@@ -137,7 +137,7 @@ public class PoseGraphic extends Graphic {
     PoseLandmark rightHip = pose.getPoseLandmark(PoseLandmark.RIGHT_HIP);
     points.add(rightHip);
 
-
+// onwards 8 squats
     PoseLandmark nose = pose.getPoseLandmark(PoseLandmark.NOSE);
     //points.add(nose);
     PoseLandmark lefyEyeInner = pose.getPoseLandmark(PoseLandmark.LEFT_EYE_INNER);
@@ -161,11 +161,11 @@ public class PoseGraphic extends Graphic {
     PoseLandmark rightMouth = pose.getPoseLandmark(PoseLandmark.RIGHT_MOUTH);
     //points.add(rightMouth);
     PoseLandmark leftKnee = pose.getPoseLandmark(PoseLandmark.LEFT_KNEE);
-    //points.add(leftKnee);
+    points.add(leftKnee);
     PoseLandmark rightKnee = pose.getPoseLandmark(PoseLandmark.RIGHT_KNEE);
     //points.add(rightKnee);
     PoseLandmark leftAnkle = pose.getPoseLandmark(PoseLandmark.LEFT_ANKLE);
-    //points.add(leftAnkle);
+    points.add(leftAnkle);
     PoseLandmark rightAnkle = pose.getPoseLandmark(PoseLandmark.RIGHT_ANKLE);
     //points.add(rightAnkle);
     PoseLandmark leftPinky = pose.getPoseLandmark(PoseLandmark.LEFT_PINKY);
@@ -185,7 +185,7 @@ public class PoseGraphic extends Graphic {
     PoseLandmark rightHeel = pose.getPoseLandmark(PoseLandmark.RIGHT_HEEL);
     //points.add(rightHeel);
     PoseLandmark leftFootIndex = pose.getPoseLandmark(PoseLandmark.LEFT_FOOT_INDEX);
-    //points.add(leftFootIndex);
+    points.add(leftFootIndex);
     PoseLandmark rightFootIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_FOOT_INDEX);
     //points.add(rightFootIndex);
     boolean flag = false;

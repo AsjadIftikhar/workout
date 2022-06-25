@@ -25,9 +25,9 @@ public class Squats {
         paint.setTextSize(100f);
     }
 
-    public double calculateAngles(PointF3D first, PointF3D second, PointF3D third){
-        double temp1= Math.atan2(third.getY()-second.getY(), third.getX()- second.getX());
-        double temp2= Math.atan2(first.getY()-second.getY(), first.getX()- second.getX());
+    public double calculateAngles(PointF3D first, PointF3D second, PointF3D third,double constant){
+        double temp1= Math.atan2(third.getY()/constant-second.getY()/constant, third.getX()/constant- second.getX()/constant);
+        double temp2= Math.atan2(first.getY()/constant-second.getY()/constant, first.getX()/constant- second.getX()/constant);
         double radian= temp1 -temp2;
         double angle= radian * (180/Math.PI);
         if(angle <0)
@@ -41,64 +41,82 @@ public class Squats {
     }
 
     public boolean processAngels(){
-        PoseLandmark leftShoulder= poses.get(0);
-        PoseLandmark rightShoulder= poses.get(1);
+        //PoseLandmark leftShoulder= poses.get(0);
+        //PoseLandmark rightShoulder= poses.get(1);
         PoseLandmark leftElbow= poses.get(2);
-        PoseLandmark rightElbow= poses.get(3);
-        PoseLandmark leftWrist= poses.get(4);
-        PoseLandmark rightWrist= poses.get(5);
+        //PoseLandmark rightElbow= poses.get(3);
+        //PoseLandmark leftWrist= poses.get(4);
+        //PoseLandmark rightWrist= poses.get(5);
         PoseLandmark leftHip= poses.get(6);
-        PoseLandmark rightHip= poses.get(7);
+        //PoseLandmark rightHip= poses.get(7);
+        PoseLandmark leftknee= poses.get(8);
+        PoseLandmark leftankle= poses.get(9);
+        PoseLandmark leftfootindex= poses.get(10);
 
-        PointF3D leftShoulderValues = leftShoulder.getPosition3D();
-        PointF3D rightShoulderValues = rightShoulder.getPosition3D();
+        //PointF3D leftShoulderValues = leftShoulder.getPosition3D();
+        //PointF3D rightShoulderValues = rightShoulder.getPosition3D();
         PointF3D leftElbowValues = leftElbow.getPosition3D();
-        PointF3D rightElbowValues = rightElbow.getPosition3D();
-        PointF3D leftWristValues = leftWrist.getPosition3D();
-        PointF3D rightWristValues = rightWrist.getPosition3D();
+       // PointF3D rightElbowValues = rightElbow.getPosition3D();
+        //PointF3D leftWristValues = leftWrist.getPosition3D();
+        //PointF3D rightWristValues = rightWrist.getPosition3D();
         PointF3D leftHipValues = leftHip.getPosition3D();
-        PointF3D rightHipValues = rightHip.getPosition3D();
+        //PointF3D rightHipValues = rightHip.getPosition3D();
+        PointF3D leftkneeValues = leftknee.getPosition3D();
+        PointF3D leftankleValues = leftankle.getPosition3D();
+        PointF3D leftfootindexValues = leftfootindex.getPosition3D();
 
-        double left_angle_for_curl=calculateAngles(leftShoulderValues,leftElbowValues,leftWristValues);
-        double left_angle_for_tuck=calculateAngles(leftHipValues,leftShoulderValues,leftElbowValues);
-        //Log.d("ADebugTag", "left Angel for Tuck: " + Double.toString(left_angle_for_tuck));
-        double right_angle_for_curl=calculateAngles(rightShoulderValues,rightElbowValues,rightWristValues);
-        double right_angle_for_tuck=calculateAngles(rightHipValues,rightShoulderValues,rightElbowValues);
-        double distance_shoulder_elbow_left=(leftElbowValues.getY()-leftShoulderValues.getY());
-        double distance_hip_shoulder_left=(leftHipValues.getY()-leftShoulderValues.getY());
-        double distance_shoulder_elbow_right=(rightElbowValues.getY()-rightShoulderValues.getY());
-        double distance_hip_shoulder_right=(rightHipValues.getY()-rightShoulderValues.getY());
+//        double left_angle_for_curl=calculateAngles(leftShoulderValues,leftElbowValues,leftWristValues);
+//        double left_angle_for_tuck=calculateAngles(leftHipValues,leftShoulderValues,leftElbowValues);
+//        //Log.d("ADebugTag", "left Angel for Tuck: " + Double.toString(left_angle_for_tuck));
+//        double right_angle_for_curl=calculateAngles(rightShoulderValues,rightElbowValues,rightWristValues);
+//        double right_angle_for_tuck=calculateAngles(rightHipValues,rightShoulderValues,rightElbowValues);
+//        double distance_shoulder_elbow_left=(leftElbowValues.getY()-leftShoulderValues.getY());
+//        double distance_hip_shoulder_left=(leftHipValues.getY()-leftShoulderValues.getY());
+//        double distance_shoulder_elbow_right=(rightElbowValues.getY()-rightShoulderValues.getY());
+//        double distance_hip_shoulder_right=(rightHipValues.getY()-rightShoulderValues.getY());
+//
+//        //squats
+        double distance_leftKnee_leftAnkle=(leftkneeValues.getY()-leftankleValues.getY());
+//        double distance_knee_left=(leftElbowValues.getY()-leftShoulderValues.getY());
+        double angle_left_squat=calculateAngles(leftankleValues,leftkneeValues,leftHipValues,distance_leftKnee_leftAnkle);
+        double angle_error_squat=calculateAngles(leftkneeValues,leftankleValues,leftfootindexValues,distance_leftKnee_leftAnkle);
 
-        double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
-        double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
+        Log.d(String.valueOf(angle_left_squat), "processAngels: ");
+        //Log.d(String.valueOf(angle_error_squat), "processAngels: ");
 
-        if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
+
+
+//        double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
+        //double ratioR= /distance_hip_shoulder_right;
+
+        if(angle_left_squat>=120) {
             stopFlag= true;
-            canvas.drawText("You are in Squats", 120,350,paint);
+            //canvas.drawText("You are in Squats", 120,350,paint);
             stage="up";
         }
         else{
             stopFlag =false;
 
         }
-        if(stopFlag==false && left_angle_for_curl>160 && right_angle_for_curl>160){
+        if(stopFlag==false && angle_left_squat<=80){
+            if(angle_error_squat>=125){
+                canvas.drawText("Knees forward.",120,350,paint);
+            }
+            if(angle_left_squat<=50){
+                canvas.drawText("Hips too low",120,550,paint);
+            }
+
             stage="down";
 
         }
-        if(ratioL <0.47 && ratioR<0.49) {
-            stopFlag = true;
-            stage = "up";
-            canvas.drawText("Elbows are moving", 120, 550, paint);
-        }
-
-        if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
+        if(stopFlag==false && angle_left_squat>=110 && stage=="down"){
             stage="up";
             counter=counter+1;
         }
         canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
         canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-        Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
-        Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
+//        Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
+//        Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
 
         return stopFlag;
     }
