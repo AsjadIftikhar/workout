@@ -21,11 +21,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import androidx.annotation.Nullable;
 
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
+import com.google.mlkit.vision.demo.java.posedetector.BicepCurl;
+import com.google.mlkit.vision.demo.java.posedetector.ShoulderPress;
+import com.google.mlkit.vision.demo.java.posedetector.Squats;
+
 /** Graphic instance for rendering inference info (latency, FPS, resolution) in an overlay view. */
 public class InferenceInfoGraphic extends GraphicOverlay.Graphic {
 
   private static final int TEXT_COLOR = Color.WHITE;
-  private static final float TEXT_SIZE = 60.0f;
+  private static final float TEXT_SIZE = 80.0f;
 
   private final Paint textPaint;
   private final GraphicOverlay overlay;
@@ -62,28 +67,41 @@ public class InferenceInfoGraphic extends GraphicOverlay.Graphic {
   @Override
   public synchronized void draw(Canvas canvas) {
     float x = TEXT_SIZE * 0.5f;
-    float y = TEXT_SIZE * 1.5f;
+    float y = TEXT_SIZE * 1.1f;
 
-    canvas.drawText(
-        "InputImage size: " + overlay.getImageHeight() + "x" + overlay.getImageWidth(),
-        x,
-        y,
-        textPaint);
 
     if (!showLatencyInfo) {
       return;
     }
     // Draw FPS (if valid) and inference latency
     if (framesPerSecond != null) {
-      canvas.drawText(
-          "FPS: " + framesPerSecond + ", Frame latency: " + frameLatency + " ms",
-          x,
-          y + TEXT_SIZE,
-          textPaint);
-    } else {
-      canvas.drawText("Frame latency: " + frameLatency + " ms", x, y + TEXT_SIZE, textPaint);
+      if (LivePreviewActivity.selectedExercise==1) {
+
+        canvas.drawText(
+                "Sets: " + String.valueOf(BicepCurl.counter/LivePreviewActivity.numOfReps) + ", Repetitions " + String.valueOf(BicepCurl.counter) ,
+                x,
+                y + TEXT_SIZE,
+                textPaint);
+      }
+      else if (LivePreviewActivity.selectedExercise==2) {
+
+        canvas.drawText(
+                "Sets: " + String.valueOf(Squats.counter/LivePreviewActivity.numOfReps) + ", Repetitions " + String.valueOf(Squats.counter) ,
+                x,
+                y + TEXT_SIZE,
+                textPaint);
+      }
+      else if (LivePreviewActivity.selectedExercise==3) {
+
+        canvas.drawText(
+                "Sets: " + String.valueOf(ShoulderPress.counter/LivePreviewActivity.numOfReps) + ", Repetitions " + String.valueOf(ShoulderPress.counter) ,
+                x,
+                y + TEXT_SIZE,
+                textPaint);
+      }
+
     }
-    canvas.drawText(
-        "Detector latency: " + detectorLatency + " ms", x, y + TEXT_SIZE * 2, textPaint);
+//    canvas.drawText(
+//        "Detector latency: " + detectorLatency + " ms", x, y + TEXT_SIZE * 2, textPaint);
   }
 }

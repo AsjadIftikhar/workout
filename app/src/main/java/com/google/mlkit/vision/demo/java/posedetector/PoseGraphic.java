@@ -190,19 +190,19 @@ public class PoseGraphic extends Graphic {
     //points.add(rightFootIndex);
     boolean flag = false;
     if(LivePreviewActivity.selectedExercise==1) {
-      BicepCurl obj = new BicepCurl(points, canvas, leftPaint);
+      BicepCurl obj = new BicepCurl(points, canvas, rightPaint);
 
       flag = obj.processAngels();
     }
 
     else if(LivePreviewActivity.selectedExercise==2) {
-      Squats obj = new Squats(points, canvas, leftPaint);
+      Squats obj = new Squats(points, canvas, rightPaint);
 
       flag = obj.processAngels();
     }
 
     else if(LivePreviewActivity.selectedExercise==3) {
-      ShoulderPress obj = new ShoulderPress(points, canvas, leftPaint);
+      ShoulderPress obj = new ShoulderPress(points, canvas, rightPaint);
 
       flag = obj.processAngels();
     }

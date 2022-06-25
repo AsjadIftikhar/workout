@@ -18,6 +18,10 @@ public class ShoulderPress {
     static boolean stopFlag = false;
     static String stage="down";
     public static int counter=0;
+    private static final float TEXT_SIZE = 80.0f;
+    float x = TEXT_SIZE * 0.5f;
+    float y = TEXT_SIZE * 1.5f;
+
     public ShoulderPress(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
@@ -96,11 +100,11 @@ public class ShoulderPress {
             stage="down";
         }
         if(ratioL>1.5){
-            canvas.drawText("bring arm closer ", 300,450,paint);
+            canvas.drawText("Bring Arm Closer", x+50,y+ TEXT_SIZE *2,paint);
         }
         if(ratioL<1.1){
             if(stage=="down")
-            canvas.drawText("make arms wider", 300,450,paint);
+                canvas.drawText("Make Arm Wider", x+50, (y+ TEXT_SIZE *3)+10, paint);
         }
 
 
@@ -108,10 +112,13 @@ public class ShoulderPress {
             stage="up";
             counter=counter+1;
         }
-        canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
+        //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
         //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
 
-        canvas.drawText(stage, 120,350,paint);
+        //canvas.drawText(stage, 120,350,paint);
+        if(ShoulderPress.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
+            return true;
+        }
 
         return stopFlag;
     }
