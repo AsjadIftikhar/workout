@@ -14,20 +14,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="97dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="114dp"
+        android:layout_height="24dp"
         android:layout_marginTop="8dp"
         android:text="Workout Name"
         android:textColor="@color/blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toStartOf="@+id/workoutName"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/workout_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65" />
 
@@ -36,8 +37,9 @@
         android:layout_width="78dp"
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
-        android:text="Repetition"
+        android:text="Repetitions"
         android:textColor="@color/blue"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="MissingConstraints" />
@@ -50,19 +52,21 @@
         android:layout_marginBottom="8dp"
         android:text="Date"
         android:textColor="@color/blue"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/workoutName"
-        android:layout_width="66dp"
+        android:layout_width="107dp"
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="80dp"
-        android:textAlignment="center"
+        android:layout_marginEnd="40dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,21 +78,63 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/workoutName"
         app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="73dp"
-        android:layout_height="21dp"
+        android:layout_width="96dp"
+        android:layout_height="19dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/repitition"
         app:layout_constraintTop_toBottomOf="@+id/repitition" />
+
+    <ImageView
+        android:id="@+id/workout_image"
+        android:layout_width="82dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_bicep" />
+
+    <ImageView
+        android:id="@+id/iv_name"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_name" />
+
+    <ImageView
+        android:id="@+id/iv_reps"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_name"
+        app:layout_constraintTop_toBottomOf="@+id/iv_name"
+        tools:srcCompat="@drawable/ic_repetition" />
+
+    <ImageView
+        android:id="@+id/iv_date"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_reps"
+        app:layout_constraintTop_toBottomOf="@+id/iv_reps"
+        tools:srcCompat="@drawable/ic_date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

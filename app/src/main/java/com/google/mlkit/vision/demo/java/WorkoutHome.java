@@ -33,6 +33,7 @@ public class WorkoutHome extends AppCompatActivity {
         setContentView(R.layout.activity_workouthistory);
         recyclerView= findViewById(R.id.rv_history);
         workoutList = new ArrayList<>();
+        getSupportActionBar().hide();
         setWorkoutInfo();
         setAdapter();
     }
