@@ -1,6 +1,7 @@
 package com.google.mlkit.vision.demo.java.posedetector;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import com.google.mlkit.vision.common.PointF3D;
@@ -18,6 +19,12 @@ public class BicepCurl {
     static boolean stopFlag = false;
     static String stage="down";
     public static int counter=0;
+
+    private static final float TEXT_SIZE = 80.0f;
+    float x = TEXT_SIZE * 0.5f;
+    float y = TEXT_SIZE * 1.5f;
+
+
     public BicepCurl(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
@@ -74,7 +81,7 @@ public class BicepCurl {
         boolean flag=false;
         if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
             stopFlag= true;
-            canvas.drawText("You are flaring out", 120,350,paint);
+            canvas.drawText("You are flaring out", x+50,y+ TEXT_SIZE *2,paint);
             stage="up";
         }
         else{
@@ -88,15 +95,15 @@ public class BicepCurl {
         if(ratioL <0.47 && ratioR<0.49) {
             stopFlag = true;
             stage = "up";
-            canvas.drawText("Elbows are moving", 120, 550, paint);
+            canvas.drawText("Elbows are moving", x+50, (y+ TEXT_SIZE *3)+10, paint);
         }
 
         if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
             stage="up";
             counter=counter+1;
         }
-        canvas.drawText("Sets: "+ Integer.toString(counter/LivePreviewActivity.numOfReps), 400,250,paint);
-        canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
+        //canvas.drawText("Sets: "+ Integer.toString(counter/LivePreviewActivity.numOfReps), 400,250,paint);
+        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
         Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
         Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
         if(BicepCurl.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){

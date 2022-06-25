@@ -18,6 +18,11 @@ public class Squats {
     static boolean stopFlag = false;
     static String stage="down";
     public static int counter=0;
+    private static final float TEXT_SIZE = 80.0f;
+    float x = TEXT_SIZE * 0.5f;
+    float y = TEXT_SIZE * 1.5f;
+
+
     public Squats(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
@@ -100,10 +105,10 @@ public class Squats {
         }
         if(stopFlag==false && angle_left_squat<=80){
             if(angle_error_squat>=125){
-                canvas.drawText("Knees forward.",120,350,paint);
+                canvas.drawText("Knees Moving", x+50,y+ TEXT_SIZE *2,paint);
             }
             if(angle_left_squat<=50){
-                canvas.drawText("Hips too low",120,550,paint);
+                canvas.drawText("Hips too low", x+50, (y+ TEXT_SIZE *3)+10, paint);
             }
 
             stage="down";
@@ -113,11 +118,11 @@ public class Squats {
             stage="up";
             counter=counter+1;
         }
-        canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
-        canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-//        Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
-//        Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
-
+        //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
+        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
+        if(Squats.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
+            return true;
+        }
         return stopFlag;
     }
 }
