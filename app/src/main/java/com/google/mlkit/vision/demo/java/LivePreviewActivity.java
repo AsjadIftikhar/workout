@@ -102,7 +102,8 @@ public final class LivePreviewActivity extends AppCompatActivity
     Spinner spinner = findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
     options.add(POSE_DETECTION);
-
+///
+    options.add("Deadlift");
 
     // Creating adapter for spinner
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);

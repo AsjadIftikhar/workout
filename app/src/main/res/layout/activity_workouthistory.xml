@@ -20,21 +20,21 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="52dp"
-            android:layout_height="57dp"
+            android:layout_width="85dp"
+            android:layout_height="64dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_dumbbell" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="370dp"
-            android:layout_height="67dp"
+            android:layout_width="324dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:text="WORKOUT HISTORY"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="34sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:typeface="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +46,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
-        android:layout_width="409dp"
-        android:layout_height="626dp"
+        android:layout_width="406dp"
+        android:layout_height="698dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"

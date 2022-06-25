@@ -29,7 +29,7 @@
             app:backgroundTint="#CF505F"
             app:iconTint="#DEE1F4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.549"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_profile_activity" />
 
