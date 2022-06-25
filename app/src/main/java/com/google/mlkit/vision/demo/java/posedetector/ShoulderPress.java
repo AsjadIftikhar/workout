@@ -24,10 +24,9 @@ public class ShoulderPress {
         paint=color;
         paint.setTextSize(100f);
     }
-
-    public double calculateAngles(PointF3D first, PointF3D second, PointF3D third){
-        double temp1= Math.atan2(third.getY()-second.getY(), third.getX()- second.getX());
-        double temp2= Math.atan2(first.getY()-second.getY(), first.getX()- second.getX());
+    public double calculateAngles(PointF3D first, PointF3D second, PointF3D third,double constant){
+        double temp1= Math.atan2(third.getY()/constant-second.getY()/constant, third.getX()/constant- second.getX()/constant);
+        double temp2= Math.atan2(first.getY()/constant-second.getY()/constant, first.getX()/constant- second.getX()/constant);
         double radian= temp1 -temp2;
         double angle= radian * (180/Math.PI);
         if(angle <0)
@@ -39,6 +38,7 @@ public class ShoulderPress {
         }
         return angle;
     }
+
 
     public boolean processAngels(){
         PoseLandmark leftShoulder= poses.get(0);
@@ -59,47 +59,59 @@ public class ShoulderPress {
         PointF3D leftHipValues = leftHip.getPosition3D();
         PointF3D rightHipValues = rightHip.getPosition3D();
 
-        double left_angle_for_curl=calculateAngles(leftShoulderValues,leftElbowValues,leftWristValues);
-        double left_angle_for_tuck=calculateAngles(leftHipValues,leftShoulderValues,leftElbowValues);
+//        double left_angle_for_curl=calculateAngles(leftShoulderValues,leftElbowValues,leftWristValues);
+//        double left_angle_for_tuck=calculateAngles(leftHipValues,leftShoulderValues,leftElbowValues);
         //Log.d("ADebugTag", "left Angel for Tuck: " + Double.toString(left_angle_for_tuck));
-        double right_angle_for_curl=calculateAngles(rightShoulderValues,rightElbowValues,rightWristValues);
-        double right_angle_for_tuck=calculateAngles(rightHipValues,rightShoulderValues,rightElbowValues);
+
+
         double distance_shoulder_elbow_left=(leftElbowValues.getY()-leftShoulderValues.getY());
         double distance_hip_shoulder_left=(leftHipValues.getY()-leftShoulderValues.getY());
+
+        double right_angle_for_curl=calculateAngles(rightShoulderValues,rightElbowValues,rightWristValues,distance_hip_shoulder_left);
+        double right_angle_for_tuck=calculateAngles(rightHipValues,rightShoulderValues,rightElbowValues,distance_hip_shoulder_left);
+
         double distance_shoulder_elbow_right=(rightElbowValues.getY()-rightShoulderValues.getY());
         double distance_hip_shoulder_right=(rightHipValues.getY()-rightShoulderValues.getY());
+        double distance_wrist=(rightWristValues.getY()-leftWristValues.getY());
+        double distance=Math.sqrt((rightWristValues.getY() - leftWristValues.getY()) * (rightWristValues.getY() - leftWristValues.getY()) + (rightWristValues.getX() - leftWristValues.getX()) * (rightWristValues.getX() - leftWristValues.getX()));
+        double distance_ratio=Math.sqrt((rightShoulderValues.getY() - rightHipValues.getY()) * (rightShoulderValues.getY() - rightHipValues.getY()) + (rightShoulderValues.getX() - rightHipValues.getX()) * (rightShoulderValues.getX() - rightHipValues.getX()));
 
-        double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
-        double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
 
-        if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
+        double ratioL= distance/distance_ratio;
+        //double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
+
+       // Log.d(String.valueOf(right_angle_for_tuck), "processAngels: ");
+        Log.d(String.valueOf(distance/distance_ratio), "p----------------------: ");
+
+        if(right_angle_for_tuck<=105 && right_angle_for_curl<=105) {
             stopFlag= true;
-            canvas.drawText("You are in Shoulder Press", 120,350,paint);
-            stage="up";
+            stage="down";
         }
         else{
             stopFlag =false;
 
         }
-        if(stopFlag==false && left_angle_for_curl>160 && right_angle_for_curl>160){
+
+        if(stopFlag==false && right_angle_for_tuck<100 && right_angle_for_curl<110){
             stage="down";
-
         }
-        if(ratioL <0.47 && ratioR<0.49) {
-            stopFlag = true;
-            stage = "up";
-            canvas.drawText("Elbows are moving", 120, 550, paint);
+        if(ratioL>1.5){
+            canvas.drawText("bring arm closer ", 300,450,paint);
+        }
+        if(ratioL<1.1){
+            if(stage=="down")
+            canvas.drawText("make arms wider", 300,450,paint);
         }
 
-        if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
+
+        if(stopFlag==false && right_angle_for_tuck>= 130 && right_angle_for_curl>=140 && stage=="down"){
             stage="up";
             counter=counter+1;
         }
         canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
-        canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-        Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
-        Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
+        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
 
+        canvas.drawText(stage, 120,350,paint);
 
         return stopFlag;
     }
