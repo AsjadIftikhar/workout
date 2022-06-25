@@ -19,6 +19,7 @@ package com.google.mlkit.vision.demo.java.posedetector;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -30,6 +31,7 @@ import com.google.common.primitives.Ints;
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.GraphicOverlay.Graphic;
+import com.google.mlkit.vision.demo.HomeFragment;
 import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseLandmark;
@@ -207,6 +209,9 @@ public class PoseGraphic extends Graphic {
       flag = obj.processAngels();
     }
     if (flag ==true){
+//      Intent intent = new Intent();
+//      intent.setClass(LivePreviewActivity.getContext(), HomeFragment.class);
+//      LivePreviewActivity.getContext().startActivity(intent);
       //LiveActivity.onBackPressed();
 
     }
