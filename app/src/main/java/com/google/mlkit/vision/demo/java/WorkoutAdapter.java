@@ -76,8 +76,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
             iv_date=itemView.findViewById(R.id.iv_date);
 
 
-
-
         }
     }
 }

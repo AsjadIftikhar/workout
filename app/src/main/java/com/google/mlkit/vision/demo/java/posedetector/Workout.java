@@ -6,11 +6,12 @@ import java.io.Serializable;
 public class Workout{
     private int repititions;
     private String exerciseName;
-
+    private int sets;
     @Override
     public String toString() {
         return "Workout{" +
                 "repititions=" + repititions +
+                ", sets='" + sets + '\'' +
                 ", exerciseName='" + exerciseName + '\'' +
                 ", date='" + date + '\'' +
                 ", uID='" + uID + '\'' +
@@ -21,8 +22,17 @@ public class Workout{
         return repititions;
     }
 
+    public int getSets() {
+        return sets;
+    }
+
+
     public void setRepititions(int repititions) {
         this.repititions = repititions;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
     }
 
     public String getExerciseName() {
@@ -52,11 +62,12 @@ public class Workout{
     private String date;
     private String uID;
     public Workout(){}
-    public Workout(int repititions, String exerciseName, String date, String uID) {
+    public Workout(int repititions, String exerciseName, String date, String uID, int sets) {
         this.repititions = repititions;
         this.exerciseName = exerciseName;
         this.date = date;
         this.uID = uID;
+        this.sets = sets;
     }
 
 }
