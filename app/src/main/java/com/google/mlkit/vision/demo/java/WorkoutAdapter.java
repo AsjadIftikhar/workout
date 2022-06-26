@@ -23,7 +23,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
 
     private RecyclerViewCLickListener listener;
     private ArrayList<Workout> workoutList;
-    Context context;
     public WorkoutAdapter(ArrayList<Workout> workoutList,RecyclerViewCLickListener listener){
         this.workoutList= workoutList;
         this.listener=listener;
