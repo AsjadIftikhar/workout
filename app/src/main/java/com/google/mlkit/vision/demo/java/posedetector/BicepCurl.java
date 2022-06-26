@@ -18,13 +18,14 @@ public class BicepCurl {
     Paint paint;
     static boolean stopFlag = false;
     static String stage="down";
+    static String prevStage="down";
     public static int counter=0;
-
+    public static int negCounter=0;
     private static final float TEXT_SIZE = 80.0f;
     float x = TEXT_SIZE * 0.5f;
     float y = TEXT_SIZE * 1.5f;
 
-
+    public static int dummyCount=-1;
     public BicepCurl(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
@@ -46,6 +47,7 @@ public class BicepCurl {
         }
         return angle;
     }
+
 
     public boolean processAngels(){
         PoseLandmark leftShoulder= poses.get(0);
@@ -79,34 +81,47 @@ public class BicepCurl {
         double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
         double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
         boolean flag=false;
+        canvas.drawText(Integer.toString(negCounter), x+50, (y+ TEXT_SIZE *4)+10, paint);
+
         if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
             stopFlag= true;
             canvas.drawText("You are flaring out", x+50,y+ TEXT_SIZE *2,paint);
             stage="up";
+            if(dummyCount==-1 ){
+
+                negCounter++;
+                dummyCount=0;
+            }
+
         }
         else{
             stopFlag =false;
-
         }
+
         if(stopFlag==false && left_angle_for_curl>160 && right_angle_for_curl>160){
             stage="down";
 
         }
+
         if(ratioL <0.47 && ratioR<0.49) {
             stopFlag = true;
             stage = "up";
             canvas.drawText("Elbows are moving", x+50, (y+ TEXT_SIZE *3)+10, paint);
+            if(dummyCount==-1 ){
+                negCounter++;
+                dummyCount=0;
+
+            }
+
         }
 
         if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
             stage="up";
             counter=counter+1;
+            dummyCount=-1;
         }
-        //canvas.drawText("Sets: "+ Integer.toString(counter/LivePreviewActivity.numOfReps), 400,250,paint);
-        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-        Log.d("ADebugTag", "ratioL: " + Double.toString(ratioL));
-        Log.d("ADebugTag", "ratioR " + Double.toString(ratioR));
-        if(BicepCurl.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
+
+    if(BicepCurl.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
             return true;
         }
 

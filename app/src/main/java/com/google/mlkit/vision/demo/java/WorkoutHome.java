@@ -40,10 +40,10 @@ public class WorkoutHome extends AppCompatActivity {
 
     private void setWorkoutInfo() {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference("Workouts history2");
+        reference= FirebaseDatabase.getInstance().getReference("Workouts history3");
         userID=user.getUid();
 
-        FirebaseDatabase.getInstance().getReference().child("Workouts history2")
+        FirebaseDatabase.getInstance().getReference().child("Workouts history3")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

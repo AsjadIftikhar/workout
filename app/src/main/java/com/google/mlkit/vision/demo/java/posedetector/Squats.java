@@ -21,7 +21,8 @@ public class Squats {
     private static final float TEXT_SIZE = 80.0f;
     float x = TEXT_SIZE * 0.5f;
     float y = TEXT_SIZE * 1.5f;
-
+    public static int negCounter=0;
+    public static int dummyCount=-1;
 
     public Squats(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
@@ -106,9 +107,19 @@ public class Squats {
         if(stopFlag==false && angle_left_squat<=80){
             if(angle_error_squat>=125){
                 canvas.drawText("Knees Moving", x+50,y+ TEXT_SIZE *2,paint);
+                if(dummyCount==-1 ){
+
+                    negCounter++;
+                    dummyCount=0;
+                }
             }
             if(angle_left_squat<=50){
                 canvas.drawText("Hips too low", x+50, (y+ TEXT_SIZE *3)+10, paint);
+                if(dummyCount==-1 ){
+                    negCounter++;
+                    dummyCount=0;
+
+                }
             }
 
             stage="down";
@@ -117,6 +128,7 @@ public class Squats {
         if(stopFlag==false && angle_left_squat>=110 && stage=="down"){
             stage="up";
             counter=counter+1;
+            dummyCount=-1;
         }
         //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
         //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);

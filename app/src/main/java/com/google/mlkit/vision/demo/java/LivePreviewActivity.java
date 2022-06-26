@@ -94,7 +94,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private Button Continue;
   public static int numOfSets=-1;
   public static int numOfReps=-1;
-
+  public static String outPutFeedback="";
 
   @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
@@ -250,15 +250,40 @@ public final class LivePreviewActivity extends AppCompatActivity
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
             Workout wObj= null;
             if (selectedExercise==2) {
-              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+              double pocCounter= Squats.counter;
+              double negCounter= Squats.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              if(OutPercentage <70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps,outPutFeedback);
               Squats.counter=0;
+              Squats.negCounter=0;
             }
             else if (selectedExercise==3) {
-              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+              double pocCounter= ShoulderPress.counter;
+              double negCounter= ShoulderPress.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              if(OutPercentage <70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+
+              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps,outPutFeedback);
               ShoulderPress.counter=0;
+              ShoulderPress.negCounter=0;
             }
 
-            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
             String key = dOBJ.push().getKey();
 
             dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -303,15 +328,41 @@ public final class LivePreviewActivity extends AppCompatActivity
           if(selectedExercise!=-1){
             Workout wObj= null;
             if (selectedExercise==1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0) ) {
-              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+              double pocCounter= BicepCurl.counter;
+              double negCounter= BicepCurl.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              if(OutPercentage<70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+
+              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
               BicepCurl.counter=0;
+              BicepCurl.negCounter=0;
             }
             else if (selectedExercise==3) {
-              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+              double pocCounter= ShoulderPress.counter;
+              double negCounter= ShoulderPress.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              if(OutPercentage <70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+
+              wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps, outPutFeedback);
               ShoulderPress.counter=0;
+              ShoulderPress.negCounter=0;
             }
 
-            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
             String key = dOBJ.push().getKey();
 
             dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -358,15 +409,41 @@ public final class LivePreviewActivity extends AppCompatActivity
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
             Workout wObj= null;
             if (selectedExercise==2) {
-              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+              double pocCounter= Squats.counter;
+              double negCounter= Squats.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              if(OutPercentage <70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+
+              wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps, outPutFeedback);
               Squats.counter=0;
+              Squats.negCounter=0;
             }
             else if (selectedExercise==1) {
-              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+              double pocCounter= BicepCurl.counter;
+              double negCounter= BicepCurl.negCounter;
+              double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+              outPutFeedback="";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              if(OutPercentage <70){
+                outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+              }
+              else{
+                outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+              }
+
+              wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
               BicepCurl.counter=0;
+              BicepCurl.negCounter=0;
             }
 
-            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+            DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
             String key = dOBJ.push().getKey();
 
             dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -464,25 +541,65 @@ public final class LivePreviewActivity extends AppCompatActivity
     super.onDestroy();
     if (cameraSource != null) {
       cameraSource.release();
-      Log.d("ADebugTag", "Counter issssssssssssssss: " + Integer.toString(BicepCurl.counter));
-      //BicepCurl.counter
 
       if(BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0){
         Workout wObj= null;
         if (selectedExercise==1) {
-          wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps);
+          outPutFeedback="";
+          //Log.d(Integer.toString(((BicepCurl.counter)/(BicepCurl.counter +BicepCurl.negCounter-1))*100),"Bicep Counter------------------------")
+          double pocCounter= BicepCurl.counter;
+          double negCounter= BicepCurl.negCounter;
+          double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+          outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+          if(OutPercentage <70){
+            outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+          }
+          else{
+            outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+          }
+
+          wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
           BicepCurl.counter=0;
+          BicepCurl.negCounter=0;
         }
         else if (selectedExercise==2) {
-          wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps);
+          outPutFeedback="";
+          double pocCounter= Squats.counter;
+          double negCounter= Squats.negCounter;
+          double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+
+          outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+          if(OutPercentage <70){
+            outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+          }
+          else{
+            outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+          }
+
+          wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps, outPutFeedback);
           Squats.counter=0;
+          Squats.negCounter=0;
         }
         else if (selectedExercise==3) {
-          wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps);
+          double pocCounter= ShoulderPress.counter;
+          double negCounter= ShoulderPress.negCounter;
+          double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
+
+          outPutFeedback="";
+          outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage) +" %";
+          if(OutPercentage <70){
+            outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
+          }
+          else{
+            outPutFeedback= outPutFeedback+" .You are doing good. Keep it up('_').";
+          }
+
+          wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps, outPutFeedback);
           ShoulderPress.counter=0;
+          ShoulderPress.negCounter=0;
         }
 
-        DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history2");
+        DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
         String key = dOBJ.push().getKey();
 
         dOBJ.child(key).setValue(wObj).addOnSuccessListener(new OnSuccessListener<Void>() {
