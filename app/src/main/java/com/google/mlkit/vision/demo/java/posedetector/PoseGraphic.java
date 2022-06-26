@@ -16,6 +16,8 @@
 
 package com.google.mlkit.vision.demo.java.posedetector;
 
+import static com.google.mlkit.vision.demo.java.LivePreviewActivity.releaseMediaPlayer;
+import static com.google.mlkit.vision.demo.java.LivePreviewActivity.textToSpeech;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -24,6 +26,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.speech.tts.TextToSpeech;
 
 import androidx.annotation.RequiresApi;
 
@@ -43,6 +46,8 @@ import java.util.Locale;
 /** Draw the detected pose in preview. */
 public class PoseGraphic extends Graphic {
   LivePreviewActivity LiveActivity;
+  public int speechFlag=0;
+
   private static final float DOT_RADIUS = 8.0f;
   private static final float IN_FRAME_LIKELIHOOD_TEXT_SIZE = 30.0f;
   private static final float STROKE_WIDTH = 10.0f;
@@ -60,7 +65,6 @@ public class PoseGraphic extends Graphic {
   private final Paint leftPaint;
   private final Paint rightPaint;
   private final Paint whitePaint;
-
   PoseGraphic(
       GraphicOverlay overlay,
       Pose pose,
@@ -193,19 +197,31 @@ public class PoseGraphic extends Graphic {
     boolean flag = false;
     if(LivePreviewActivity.selectedExercise==1) {
       BicepCurl obj = new BicepCurl(points, canvas, rightPaint);
-
+//      if(speechFlag==0){
+//        String result="Bicep Curl is performed by keeping your elbows tucked to your side and not flaring them";
+//        textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
+//        speechFlag=1;
+//      }
       flag = obj.processAngels();
     }
 
     else if(LivePreviewActivity.selectedExercise==2) {
       Squats obj = new Squats(points, canvas, rightPaint);
-
+//      if(speechFlag==0){
+//        String result="Squats are performed by not moving knees too much";
+//        textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
+//        speechFlag=1;
+//      }
       flag = obj.processAngels();
     }
 
     else if(LivePreviewActivity.selectedExercise==3) {
       ShoulderPress obj = new ShoulderPress(points, canvas, rightPaint);
-
+//      if(speechFlag==0){
+//        String result="Shoulder Press is performed by keeping your arms wide and pushing them above head";
+//        textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
+//        speechFlag=1;
+//      }
       flag = obj.processAngels();
     }
     if (flag ==true){
@@ -213,7 +229,8 @@ public class PoseGraphic extends Graphic {
 //      intent.setClass(LivePreviewActivity.getContext(), HomeFragment.class);
 //      LivePreviewActivity.getContext().startActivity(intent);
       //LiveActivity.onBackPressed();
-
+      String result="Your Workout is Complete. Please Press back button";
+      textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
     }
     // Face
     drawLine(canvas, nose, lefyEyeInner, leftPaint);
