@@ -183,8 +183,8 @@
 
     <TextView
         android:id="@+id/tv_feedback_val"
-        android:layout_width="327dp"
-        android:layout_height="195dp"
+        android:layout_width="347dp"
+        android:layout_height="281dp"
         android:layout_marginTop="12dp"
         android:paddingLeft="50dp"
         android:textAlignment="center"
