@@ -15,6 +15,7 @@ public class Squats {
     ArrayList<PoseLandmark> poses;
     Canvas canvas;
     Paint paint;
+    public static boolean exerciseStopFlag= false;
     static boolean stopFlag = false;
     static String stage="down";
     public static int counter=0;
@@ -94,47 +95,48 @@ public class Squats {
 
 //        double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
         //double ratioR= /distance_hip_shoulder_right;
+        if(exerciseStopFlag ==false) {
+            if (angle_left_squat >= 120) {
+                stopFlag = true;
+                //canvas.drawText("You are in Squats", 120,350,paint);
+                stage = "up";
+            } else {
+                stopFlag = false;
 
-        if(angle_left_squat>=120) {
-            stopFlag= true;
-            //canvas.drawText("You are in Squats", 120,350,paint);
-            stage="up";
-        }
-        else{
-            stopFlag =false;
-
-        }
-        if(stopFlag==false && angle_left_squat<=80){
-            if(angle_error_squat>=125){
-                canvas.drawText("Knees Moving", x+50,y+ TEXT_SIZE *2,paint);
-                if(dummyCount==-1 ){
-
-                    negCounter++;
-                    dummyCount=0;
-                }
             }
-            if(angle_left_squat<=50){
-                canvas.drawText("Hips too low", x+50, (y+ TEXT_SIZE *3)+10, paint);
-                if(dummyCount==-1 ){
-                    negCounter++;
-                    dummyCount=0;
+            if (stopFlag == false && angle_left_squat <= 80) {
+                if (angle_error_squat >= 125) {
+                    canvas.drawText("Knees Moving", x + 50, y + TEXT_SIZE * 2, paint);
+                    if (dummyCount == -1) {
 
+                        negCounter++;
+                        dummyCount = 0;
+                    }
                 }
+                if (angle_left_squat <= 50) {
+                    canvas.drawText("Hips too low", x + 50, (y + TEXT_SIZE * 3) + 10, paint);
+                    if (dummyCount == -1) {
+                        negCounter++;
+                        dummyCount = 0;
+
+                    }
+                }
+
+                stage = "down";
+
             }
-
-            stage="down";
-
+            if (stopFlag == false && angle_left_squat >= 110 && stage == "down") {
+                stage = "up";
+                counter = counter + 1;
+                dummyCount = -1;
+            }
+            //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
+            //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
+            if (Squats.counter == LivePreviewActivity.numOfReps * LivePreviewActivity.numOfSets) {
+                exerciseStopFlag = true;
+                return true;
+            }
         }
-        if(stopFlag==false && angle_left_squat>=110 && stage=="down"){
-            stage="up";
-            counter=counter+1;
-            dummyCount=-1;
-        }
-        //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
-        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-        if(Squats.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
-            return true;
-        }
-        return stopFlag;
+        return exerciseStopFlag;
     }
 }

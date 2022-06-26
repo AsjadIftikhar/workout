@@ -16,6 +16,7 @@ public class BicepCurl {
     ArrayList<PoseLandmark> poses;
     Canvas canvas;
     Paint paint;
+    public static boolean exerciseStopFlag= false;
     static boolean stopFlag = false;
     static String stage="down";
     static String prevStage="down";
@@ -82,50 +83,49 @@ public class BicepCurl {
         double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
         boolean flag=false;
         canvas.drawText(Integer.toString(negCounter), x+50, (y+ TEXT_SIZE *4)+10, paint);
+        if (exerciseStopFlag==false) {
+            if (left_angle_for_tuck >= 25 && right_angle_for_tuck >= 25) {
+                stopFlag = true;
+                canvas.drawText("You are flaring out", x + 50, y + TEXT_SIZE * 2, paint);
+                stage = "up";
+                if (dummyCount == -1) {
+                    negCounter++;
+                    dummyCount = 0;
+                }
 
-        if(left_angle_for_tuck>=25 && right_angle_for_tuck>=25) {
-            stopFlag= true;
-            canvas.drawText("You are flaring out", x+50,y+ TEXT_SIZE *2,paint);
-            stage="up";
-            if(dummyCount==-1 ){
-
-                negCounter++;
-                dummyCount=0;
+            } else {
+                stopFlag = false;
             }
 
-        }
-        else{
-            stopFlag =false;
-        }
-
-        if(stopFlag==false && left_angle_for_curl>160 && right_angle_for_curl>160){
-            stage="down";
-
-        }
-
-        if(ratioL <0.47 && ratioR<0.49) {
-            stopFlag = true;
-            stage = "up";
-            canvas.drawText("Elbows are moving", x+50, (y+ TEXT_SIZE *3)+10, paint);
-            if(dummyCount==-1 ){
-                negCounter++;
-                dummyCount=0;
+            if (stopFlag == false && left_angle_for_curl > 160 && right_angle_for_curl > 160) {
+                stage = "down";
 
             }
 
-        }
+            if (ratioL < 0.47 && ratioR < 0.49) {
+                stopFlag = true;
+                stage = "up";
+                canvas.drawText("Elbows are moving", x + 50, (y + TEXT_SIZE * 3) + 10, paint);
+                if (dummyCount == -1) {
+                    negCounter++;
+                    dummyCount = 0;
 
-        if(stopFlag==false && left_angle_for_curl< 30 && right_angle_for_curl<30 && stage=="down"){
-            stage="up";
-            counter=counter+1;
-            dummyCount=-1;
-        }
+                }
 
-    if(BicepCurl.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
-            return true;
-        }
+            }
 
-        return false;
+            if (stopFlag == false && left_angle_for_curl < 30 && right_angle_for_curl < 30 && stage == "down") {
+                stage = "up";
+                counter = counter + 1;
+                dummyCount = -1;
+            }
+
+            if (BicepCurl.counter == LivePreviewActivity.numOfReps * LivePreviewActivity.numOfSets) {
+                exerciseStopFlag= true;
+                return true;
+            }
+        }
+        return exerciseStopFlag;
     }
 
 

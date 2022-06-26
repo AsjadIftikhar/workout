@@ -63,9 +63,11 @@ public class PoseGraphic extends Graphic {
   private final Paint leftPaint;
   private final Paint rightPaint;
   private final Paint whitePaint;
+  public static int count=0;
   PoseGraphic(
       GraphicOverlay overlay,
       Pose pose,
+
       boolean showInFrameLikelihood,
       boolean visualizeZ,
       boolean rescaleZForVisualization,
@@ -192,7 +194,7 @@ public class PoseGraphic extends Graphic {
     points.add(leftFootIndex);
     PoseLandmark rightFootIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_FOOT_INDEX);
     //points.add(rightFootIndex);
-    boolean flag = false;
+    boolean flag=false;
     if(LivePreviewActivity.selectedExercise==1) {
       BicepCurl obj = new BicepCurl(points, canvas, rightPaint);
       flag = obj.processAngels();
@@ -207,13 +209,14 @@ public class PoseGraphic extends Graphic {
       ShoulderPress obj = new ShoulderPress(points, canvas, rightPaint);
       flag = obj.processAngels();
     }
-    if (flag ==true){
+    if (flag ==true &&count <2){
 //      Intent intent = new Intent();
 //      intent.setClass(LivePreviewActivity.getContext(), HomeFragment.class);
 //      LivePreviewActivity.getContext().startActivity(intent);
       //LiveActivity.onBackPressed();
       String result="Your Workout is Complete. Please Press back button";
       textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
+      count++;
     }
     // Face
     drawLine(canvas, nose, lefyEyeInner, leftPaint);

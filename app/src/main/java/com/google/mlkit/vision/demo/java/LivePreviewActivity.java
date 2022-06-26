@@ -60,6 +60,7 @@ import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.posedetector.BicepCurl;
 import com.google.mlkit.vision.demo.java.posedetector.PoseDetectorProcessor;
+import com.google.mlkit.vision.demo.java.posedetector.PoseGraphic;
 import com.google.mlkit.vision.demo.java.posedetector.ShoulderPress;
 import com.google.mlkit.vision.demo.java.posedetector.Squats;
 import com.google.mlkit.vision.demo.java.posedetector.Workout;
@@ -261,6 +262,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     try {
       switch (model) {
         case BICEP_CURL: {
+          PoseGraphic.count=0;
           String result="Bicep Curl is performed by keeping your elbows tucked to your side and not flaring them";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
@@ -280,6 +282,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps,outPutFeedback);
               Squats.counter=0;
               Squats.negCounter=0;
+              Squats.exerciseStopFlag=false;
             }
             else if (selectedExercise==3) {
               double pocCounter= ShoulderPress.counter;
@@ -297,6 +300,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps,outPutFeedback);
               ShoulderPress.counter=0;
               ShoulderPress.negCounter=0;
+              ShoulderPress.exerciseStopFlag=false;
             }
 
             DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
@@ -341,6 +345,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           break;
         }
         case SQUATS: {
+          PoseGraphic.count=0;
           String result="Squats are performed by not moving knees too much";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1){
@@ -361,6 +366,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
               BicepCurl.counter=0;
               BicepCurl.negCounter=0;
+              BicepCurl.exerciseStopFlag=false;
             }
             else if (selectedExercise==3) {
               double pocCounter= ShoulderPress.counter;
@@ -378,6 +384,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps, outPutFeedback);
               ShoulderPress.counter=0;
               ShoulderPress.negCounter=0;
+              ShoulderPress.exerciseStopFlag=false;
             }
 
             DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
@@ -423,6 +430,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         }
 
         case SHOULDER_PRESS: {
+          PoseGraphic.count=0;
           String result="Shoulder Press is performed by keeping your arms wide and pushing them above head";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
@@ -443,6 +451,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps, outPutFeedback);
               Squats.counter=0;
               Squats.negCounter=0;
+              Squats.exerciseStopFlag=false;
             }
             else if (selectedExercise==1) {
               double pocCounter= BicepCurl.counter;
@@ -460,6 +469,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
               BicepCurl.counter=0;
               BicepCurl.negCounter=0;
+              BicepCurl.exerciseStopFlag=false;
             }
 
             DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");
@@ -563,6 +573,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
       if(BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0){
         Workout wObj= null;
+        PoseGraphic.count=0;
         if (selectedExercise==1) {
           outPutFeedback="";
           //Log.d(Integer.toString(((BicepCurl.counter)/(BicepCurl.counter +BicepCurl.negCounter-1))*100),"Bicep Counter------------------------")
@@ -580,6 +591,8 @@ public final class LivePreviewActivity extends AppCompatActivity
           wObj = new Workout(BicepCurl.counter, "Bicep Curl", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), BicepCurl.counter / numOfReps, outPutFeedback);
           BicepCurl.counter=0;
           BicepCurl.negCounter=0;
+          BicepCurl.exerciseStopFlag=false;
+
         }
         else if (selectedExercise==2) {
           outPutFeedback="";
@@ -598,6 +611,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           wObj = new Workout(Squats.counter, "Squats", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Squats.counter / numOfReps, outPutFeedback);
           Squats.counter=0;
           Squats.negCounter=0;
+          Squats.exerciseStopFlag=false;
         }
         else if (selectedExercise==3) {
           double pocCounter= ShoulderPress.counter;
@@ -616,6 +630,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           wObj = new Workout(ShoulderPress.counter, "Shoulder Press", LocalDate.now().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ShoulderPress.counter / numOfReps, outPutFeedback);
           ShoulderPress.counter=0;
           ShoulderPress.negCounter=0;
+          ShoulderPress.exerciseStopFlag=false;
         }
 
         DatabaseReference dOBJ=FirebaseDatabase.getInstance().getReference("Workouts history3");

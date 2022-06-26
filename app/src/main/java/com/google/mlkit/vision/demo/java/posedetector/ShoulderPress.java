@@ -18,6 +18,7 @@ public class ShoulderPress {
     static boolean stopFlag = false;
     static String stage="down";
     public static int counter=0;
+    public static boolean exerciseStopFlag= false;
     private static final float TEXT_SIZE = 80.0f;
     float x = TEXT_SIZE * 0.5f;
     float y = TEXT_SIZE * 1.5f;
@@ -88,50 +89,50 @@ public class ShoulderPress {
 
        // Log.d(String.valueOf(right_angle_for_tuck), "processAngels: ");
         Log.d(String.valueOf(distance/distance_ratio), "p----------------------: ");
+        if(exerciseStopFlag ==false) {
+            if (right_angle_for_tuck <= 105 && right_angle_for_curl <= 105) {
+                stopFlag = true;
+                stage = "down";
+            } else {
+                stopFlag = false;
 
-        if(right_angle_for_tuck<=105 && right_angle_for_curl<=105) {
-            stopFlag= true;
-            stage="down";
-        }
-        else{
-            stopFlag =false;
+            }
 
-        }
+            if (stopFlag == false && right_angle_for_tuck < 100 && right_angle_for_curl < 110) {
+                stage = "down";
+            }
+            if (ratioL > 1.5) {
+                canvas.drawText("Bring Arm Closer", x + 50, y + TEXT_SIZE * 2, paint);
+                if (dummyCount == -1) {
 
-        if(stopFlag==false && right_angle_for_tuck<100 && right_angle_for_curl<110){
-            stage="down";
-        }
-        if(ratioL>1.5){
-            canvas.drawText("Bring Arm Closer", x+50,y+ TEXT_SIZE *2,paint);
-            if(dummyCount==-1 ){
+                    negCounter++;
+                    dummyCount = 0;
+                }
+            }
+            if (ratioL < 0.9) {
+                if (stage == "down")
+                    canvas.drawText("Make Arm Wider", x + 50, (y + TEXT_SIZE * 3) + 10, paint);
+                if (dummyCount == -1) {
+                    negCounter++;
+                    dummyCount = 0;
+                }
+            }
 
-                negCounter++;
-                dummyCount=0;
+
+            if (stopFlag == false && right_angle_for_tuck >= 130 && right_angle_for_curl >= 140 && stage == "down") {
+                stage = "up";
+                counter = counter + 1;
+                dummyCount = -1;
+            }
+            //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
+            //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
+
+            //canvas.drawText(stage, 120,350,paint);
+            if (ShoulderPress.counter == LivePreviewActivity.numOfReps * LivePreviewActivity.numOfSets) {
+                exerciseStopFlag= true;
+                return true;
             }
         }
-        if(ratioL<0.9){
-            if(stage=="down")
-                canvas.drawText("Make Arm Wider", x+50, (y+ TEXT_SIZE *3)+10, paint);
-                if(dummyCount==-1 ){
-                    negCounter++;
-                    dummyCount=0;
-                }
-        }
-
-
-        if(stopFlag==false && right_angle_for_tuck>= 130 && right_angle_for_curl>=140 && stage=="down"){
-            stage="up";
-            counter=counter+1;
-            dummyCount=-1;
-        }
-        //canvas.drawText("Sets: "+ Integer.toString(counter/ LivePreviewActivity.numOfReps), 400,250,paint);
-        //canvas.drawText("Counter: "+ Integer.toString(counter), 300,450,paint);
-
-        //canvas.drawText(stage, 120,350,paint);
-        if(ShoulderPress.counter == LivePreviewActivity.numOfReps* LivePreviewActivity.numOfSets){
-            return true;
-        }
-
-        return stopFlag;
+        return exerciseStopFlag;
     }
 }
