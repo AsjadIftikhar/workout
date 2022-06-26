@@ -263,6 +263,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       switch (model) {
         case BICEP_CURL: {
           PoseGraphic.count=0;
+          PoseGraphic.prevSetCount=0;
           String result="Bicep Curl is performed by keeping your elbows tucked to your side and not flaring them";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
@@ -270,9 +271,10 @@ public final class LivePreviewActivity extends AppCompatActivity
             if (selectedExercise==2) {
               double pocCounter= Squats.counter;
               double negCounter= Squats.negCounter;
+              int negCount=Squats.counter/2;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
               if(OutPercentage <70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -287,9 +289,10 @@ public final class LivePreviewActivity extends AppCompatActivity
             else if (selectedExercise==3) {
               double pocCounter= ShoulderPress.counter;
               double negCounter= ShoulderPress.negCounter;
+              int negCount=ShoulderPress.counter/2;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
               if(OutPercentage <70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -346,6 +349,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         }
         case SQUATS: {
           PoseGraphic.count=0;
+          PoseGraphic.prevSetCount=0;
           String result="Squats are performed by not moving knees too much";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1){
@@ -355,7 +359,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               double negCounter= BicepCurl.negCounter;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
               if(OutPercentage<70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -371,9 +375,10 @@ public final class LivePreviewActivity extends AppCompatActivity
             else if (selectedExercise==3) {
               double pocCounter= ShoulderPress.counter;
               double negCounter= ShoulderPress.negCounter;
+              int negCount=ShoulderPress.counter/2;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
               if(OutPercentage <70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -431,6 +436,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
         case SHOULDER_PRESS: {
           PoseGraphic.count=0;
+          PoseGraphic.prevSetCount=0;
           String result="Shoulder Press is performed by keeping your arms wide and pushing them above head";
           textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
@@ -438,9 +444,10 @@ public final class LivePreviewActivity extends AppCompatActivity
             if (selectedExercise==2) {
               double pocCounter= Squats.counter;
               double negCounter= Squats.negCounter;
+              int negCount=Squats.counter/2;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+ " %";
               if(OutPercentage <70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -458,7 +465,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               double negCounter= BicepCurl.negCounter;
               double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
               outPutFeedback="";
-              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+              outPutFeedback="You move to Incorrect Posture "+Integer.toString(BicepCurl.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
               if(OutPercentage <70){
                 outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
               }
@@ -574,6 +581,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       if(BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0){
         Workout wObj= null;
         PoseGraphic.count=0;
+        PoseGraphic.prevSetCount=0;
         if (selectedExercise==1) {
           outPutFeedback="";
           //Log.d(Integer.toString(((BicepCurl.counter)/(BicepCurl.counter +BicepCurl.negCounter-1))*100),"Bicep Counter------------------------")
@@ -597,10 +605,11 @@ public final class LivePreviewActivity extends AppCompatActivity
         else if (selectedExercise==2) {
           outPutFeedback="";
           double pocCounter= Squats.counter;
-          double negCounter= Squats.negCounter;
+          double negCounter= Squats.counter/2;
+          int negCount=Squats.counter/2;
           double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
 
-          outPutFeedback="You move to Incorrect Posture "+Integer.toString(Squats.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
+          outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage)+" %";
           if(OutPercentage <70){
             outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
           }
@@ -615,11 +624,12 @@ public final class LivePreviewActivity extends AppCompatActivity
         }
         else if (selectedExercise==3) {
           double pocCounter= ShoulderPress.counter;
-          double negCounter= ShoulderPress.negCounter;
+          double negCounter= ShoulderPress.counter/2;
+          int negCount=ShoulderPress.counter/2;
           double OutPercentage=((pocCounter)/(pocCounter +negCounter-1))*100;
 
           outPutFeedback="";
-          outPutFeedback="You move to Incorrect Posture "+Integer.toString(ShoulderPress.negCounter-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage) +" %";
+          outPutFeedback="You move to Incorrect Posture "+Integer.toString(negCount-1)+" times in your Workout. Your overall workout performance score is "+ Double.toString(OutPercentage) +" %";
           if(OutPercentage <70){
             outPutFeedback= outPutFeedback+" .Please try to improve your Workout.";
           }

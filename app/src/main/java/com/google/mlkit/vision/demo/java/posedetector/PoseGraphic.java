@@ -57,13 +57,18 @@ public class PoseGraphic extends Graphic {
   private final boolean rescaleZForVisualization;
   private float zMin = Float.MAX_VALUE;
   private float zMax = Float.MIN_VALUE;
-
+  public static int prevSetCount=0;
   private final List<String> poseClassification;
   private final Paint classificationTextPaint;
   private final Paint leftPaint;
   private final Paint rightPaint;
   private final Paint whitePaint;
   public static int count=0;
+  int one=1;
+  int two=2;
+  int three=3;
+  int four=4;
+  public String setString="";
   PoseGraphic(
       GraphicOverlay overlay,
       Pose pose,
@@ -198,17 +203,67 @@ public class PoseGraphic extends Graphic {
     if(LivePreviewActivity.selectedExercise==1) {
       BicepCurl obj = new BicepCurl(points, canvas, rightPaint);
       flag = obj.processAngels();
+      if(prevSetCount!=BicepCurl.counter/LivePreviewActivity.numOfReps && flag==false){
+        prevSetCount=BicepCurl.counter/LivePreviewActivity.numOfReps;
+        if(prevSetCount==one){
+          setString="Set one completed.";
+        }
+        else if(prevSetCount==two){
+          setString="Set two completed.";
+        }
+        else if(prevSetCount==three){
+          setString="Set three completed.";
+        }
+        else if(prevSetCount==four){
+          setString="Set four completed.";
+        }
+        textToSpeech.speak(setString,TextToSpeech.QUEUE_FLUSH,null);
+      }
     }
 
     else if(LivePreviewActivity.selectedExercise==2) {
       Squats obj = new Squats(points, canvas, rightPaint);
       flag = obj.processAngels();
+      if(prevSetCount!=Squats.counter/LivePreviewActivity.numOfReps && flag==false){
+        prevSetCount=Squats.counter/LivePreviewActivity.numOfReps;
+        if(prevSetCount==one){
+          setString="Set one completed.";
+        }
+        else if(prevSetCount==two){
+          setString="Set two completed.";
+        }
+        else if(prevSetCount==three){
+          setString="Set three completed.";
+        }
+        else if(prevSetCount==four){
+          setString="Set four completed.";
+        }
+        textToSpeech.speak(setString,TextToSpeech.QUEUE_FLUSH,null);
+      }
     }
 
     else if(LivePreviewActivity.selectedExercise==3) {
       ShoulderPress obj = new ShoulderPress(points, canvas, rightPaint);
       flag = obj.processAngels();
+      if(prevSetCount!=ShoulderPress.counter/LivePreviewActivity.numOfReps && flag==false){
+        prevSetCount=ShoulderPress.counter/LivePreviewActivity.numOfReps;
+        if(prevSetCount==one){
+          setString="Set one completed.";
+        }
+        else if(prevSetCount==two){
+          setString="Set two completed.";
+        }
+        else if(prevSetCount==three){
+          setString="Set three completed.";
+        }
+        else if(prevSetCount==four){
+          setString="Set four completed.";
+        }
+        textToSpeech.speak(setString,TextToSpeech.QUEUE_FLUSH,null);
+      }
     }
+
+
     if (flag ==true &&count <2){
 //      Intent intent = new Intent();
 //      intent.setClass(LivePreviewActivity.getContext(), HomeFragment.class);
@@ -218,6 +273,7 @@ public class PoseGraphic extends Graphic {
       textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
       count++;
     }
+
     // Face
     drawLine(canvas, nose, lefyEyeInner, leftPaint);
     drawLine(canvas, lefyEyeInner, lefyEye, leftPaint);
