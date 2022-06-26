@@ -71,7 +71,7 @@ public class WorkoutHome extends AppCompatActivity {
     }
 
     public void setAdapter(){
-        setOnClickListener();
+        setonClickListener();
         adapter= new WorkoutAdapter(workoutList,listener);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -79,7 +79,7 @@ public class WorkoutHome extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setOnClickListener() {
+    private void setonClickListener() {
         listener=new WorkoutAdapter.RecyclerViewCLickListener() {
             @Override
             public void onClick(View v, int position) {
