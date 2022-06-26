@@ -24,7 +24,7 @@ public class ShoulderPress {
     float y = TEXT_SIZE * 1.5f;
     public static int negCounter=0;
     public static int dummyCount=-1;
-
+    static boolean armFlag=false;
     public ShoulderPress(ArrayList<PoseLandmark> poses, Canvas c, Paint color){
         this.poses= poses;
         canvas= c;
@@ -91,6 +91,7 @@ public class ShoulderPress {
         Log.d(String.valueOf(distance/distance_ratio), "p----------------------: ");
         if(exerciseStopFlag ==false) {
             if (right_angle_for_tuck <= 105 && right_angle_for_curl <= 105) {
+                armFlag=false;
                 stopFlag = true;
                 stage = "down";
             } else {
@@ -103,13 +104,14 @@ public class ShoulderPress {
             }
             if (ratioL > 1.5) {
                 canvas.drawText("Bring Arm Closer", x + 50, y + TEXT_SIZE * 2, paint);
+                armFlag=true;
                 if (dummyCount == -1) {
 
                     negCounter++;
                     dummyCount = 0;
                 }
             }
-            if (ratioL < 0.9) {
+            if (ratioL < 1.1) {
                 if (stage == "down")
                     canvas.drawText("Make Arm Wider", x + 50, (y + TEXT_SIZE * 3) + 10, paint);
                 if (dummyCount == -1) {
@@ -119,7 +121,7 @@ public class ShoulderPress {
             }
 
 
-            if (stopFlag == false && right_angle_for_tuck >= 130 && right_angle_for_curl >= 145 && stage == "down") {
+            if (stopFlag == false && right_angle_for_tuck >= 130 && right_angle_for_curl >= 145 && stage == "down" &&armFlag==false) {
                 stage = "up";
                 counter = counter + 1;
                 dummyCount = -1;
