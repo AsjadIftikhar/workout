@@ -30,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -70,6 +71,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @KeepName
 public final class LivePreviewActivity extends AppCompatActivity
@@ -79,6 +81,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private static final String BICEP_CURL = "BICEP CURLS";
   private static final String SQUATS = "SQUATS";
   private static final String SHOULDER_PRESS = "SHOULDER PRESS";
+  public static  TextToSpeech textToSpeech;
 
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
@@ -87,7 +90,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = BICEP_CURL;
-  private MediaPlayer mMediaplayer;
+  public static MediaPlayer mMediaplayer;
   private AlertDialog.Builder dialogBuilder;
   private AlertDialog dialog;
   private EditText numberOfSets, numberOfReps;
@@ -95,6 +98,11 @@ public final class LivePreviewActivity extends AppCompatActivity
   public static int numOfSets=-1;
   public static int numOfReps=-1;
   public static String outPutFeedback="";
+
+  public static Context getContext() {
+    return LivePreviewActivity.getContext();
+  }
+
 
   @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
@@ -104,9 +112,9 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     setContentView(R.layout.activity_vision_live_preview);
 
-    mMediaplayer=MediaPlayer.create(this,R.raw.music);
+    //mMediaplayer=MediaPlayer.create(this,R.raw.music);
 
-    mMediaplayer.start();
+    //mMediaplayer.start();
     preview = findViewById(R.id.preview_view);
     if (preview == null) {
       Log.d(TAG, "Preview is null");
@@ -121,6 +129,15 @@ public final class LivePreviewActivity extends AppCompatActivity
     options.add(BICEP_CURL);
     options.add(SQUATS);
     options.add(SHOULDER_PRESS);
+
+    textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+      @Override
+      public void onInit(int i) {
+        if(i!=TextToSpeech.ERROR){
+          textToSpeech.setLanguage(Locale.CANADA);
+        }
+      }
+    });
 
 ///
     //options.add("Deadlift");
@@ -163,9 +180,6 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   }
 
-  public static Context getContext() {
-    return LivePreviewActivity.getContext();
-  }
 
   public void getSetsInfo(){
 
@@ -196,7 +210,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   }
 
-  private void releaseMediaPlayer(){
+  public static void releaseMediaPlayer(){
     if(mMediaplayer!=null){
       mMediaplayer.release();
       mMediaplayer=null;
@@ -520,9 +534,9 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.d(TAG, "onResume");
     createCameraSource(selectedModel);
     startCameraSource();
-    if(mMediaplayer!= null){
-      mMediaplayer.start();
-    }
+//    if(mMediaplayer!= null){
+//      mMediaplayer.start();
+//    }
   }
 
   /** Stops the camera. */
@@ -530,9 +544,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   protected void onPause() {
     super.onPause();
     preview.stop();
-    if(mMediaplayer!= null){
-      mMediaplayer.pause();
-    }
+//    if(mMediaplayer!= null){
+//      mMediaplayer.pause();
+//    }
   }
 
   @RequiresApi(api = Build.VERSION_CODES.O)

@@ -7,6 +7,48 @@
     android:background="#FFFFFF"
     tools:context=".java.BMI_calculation">
 
+    <TextView
+        android:id="@+id/tv_date_value"
+        android:layout_width="180dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_editview_1"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_workout_name_value" />
+
+    <TextView
+        android:id="@+id/tv_set_value"
+        android:layout_width="148dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/custom_editview_1"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_value" />
+
+    <TextView
+        android:id="@+id/tv_rep_value"
+        android:layout_width="148dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/custom_editview_1"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_set_value" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="413dp"
@@ -31,7 +73,7 @@
             android:layout_width="314dp"
             android:layout_height="67dp"
             android:layout_marginTop="35dp"
-            android:text="BMI Calculation"
+            android:text="Workout History"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="34sp"
@@ -47,32 +89,28 @@
 
     <TextView
         android:id="@+id/tv_workout_name"
-        android:layout_width="128dp"
-        android:layout_height="36dp"
+        android:layout_width="148dp"
+        android:layout_height="37dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Age"
+        android:text="Workout Name"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <EditText
-        android:id="@+id/tv_age_num"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="30dp"
+    <TextView
+        android:id="@+id/tv_workout_name_value"
+        android:layout_width="180dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_editview_1"
-        android:ems="10"
-        android:hint="in years"
-        android:paddingLeft="60dp"
-        android:textColorHint="@color/white"
-        android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -84,62 +122,40 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Height"
+        android:text="Date"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_workout_name" />
 
-    <EditText
-        android:id="@+id/tv_height_num"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/custom_editview_1"
-        android:ems="10"
-        android:hint="in cm"
-        android:paddingLeft="60dp"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_num" />
-
     <TextView
         android:id="@+id/tv_set"
-        android:layout_width="130dp"
+        android:layout_width="175dp"
         android:layout_height="36dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/custom_textview"
-        android:text="Enter Weight"
+        android:text="Sets Performed"
         android:textColor="#4F6CDE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_height_bmi" />
 
-    <EditText
-        android:id="@+id/tv_weight_num"
-        android:layout_width="160dp"
+    <TextView
+        android:id="@+id/tv_reps"
+        android:layout_width="175dp"
         android:layout_height="36dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/custom_editview_1"
-        android:ems="10"
-        android:hint="in kgs"
-        android:paddingLeft="60dp"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:background="@drawable/custom_textview"
+        android:text="Repetitions"
+        android:textColor="#4F6CDE"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_num" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_set" />
 
     <Button
         android:id="@+id/btn_calculate_bmi"
@@ -147,58 +163,28 @@
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
 
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_buttons"
-        android:text="Calculate"
+        android:text="FeedBack"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold"
         app:backgroundTint="#CF505F"
         app:iconTint="#DEE1F4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_set" />
-
-    <ImageView
-        android:id="@+id/bmi_signal"
-        android:layout_width="192dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="48dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_calculate_bmi"
-        app:srcCompat="@drawable/ic_green_circle" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_reps" />
 
     <TextView
-        android:id="@+id/tv_bmi_value"
-        android:layout_width="110dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_textview"
-        android:text=""
+        android:id="@+id/tv_feedback_val"
+        android:layout_width="327dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="12dp"
         android:textAlignment="center"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bmi_signal" />
-
-    <TextView
-        android:id="@+id/tv_bmi_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/custom_textview"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="#4F6CDE"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bmi_value" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_calculate_bmi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
