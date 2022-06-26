@@ -261,6 +261,8 @@ public final class LivePreviewActivity extends AppCompatActivity
     try {
       switch (model) {
         case BICEP_CURL: {
+          String result="Bicep Curl is performed by keeping your elbows tucked to your side and not flaring them";
+          textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
             Workout wObj= null;
             if (selectedExercise==2) {
@@ -339,6 +341,8 @@ public final class LivePreviewActivity extends AppCompatActivity
           break;
         }
         case SQUATS: {
+          String result="Squats are performed by not moving knees too much";
+          textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1){
             Workout wObj= null;
             if (selectedExercise==1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0) ) {
@@ -419,7 +423,8 @@ public final class LivePreviewActivity extends AppCompatActivity
         }
 
         case SHOULDER_PRESS: {
-
+          String result="Shoulder Press is performed by keeping your arms wide and pushing them above head";
+          textToSpeech.speak(result,TextToSpeech.QUEUE_FLUSH,null);
           if(selectedExercise!=-1 && (BicepCurl.counter !=0 || ShoulderPress.counter!=0 || Squats.counter!=0)){
             Workout wObj= null;
             if (selectedExercise==2) {
