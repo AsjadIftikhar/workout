@@ -82,7 +82,7 @@ public class BicepCurl {
         double ratioL= distance_shoulder_elbow_left/distance_hip_shoulder_left;
         double ratioR= distance_shoulder_elbow_right/distance_hip_shoulder_right;
         boolean flag=false;
-        canvas.drawText(Integer.toString(negCounter), x+50, (y+ TEXT_SIZE *4)+10, paint);
+        //canvas.drawText(Integer.toString(negCounter), x+50, (y+ TEXT_SIZE *4)+10, paint);
         if (exerciseStopFlag==false) {
             if (left_angle_for_tuck >= 25 && right_angle_for_tuck >= 25) {
                 stopFlag = true;
