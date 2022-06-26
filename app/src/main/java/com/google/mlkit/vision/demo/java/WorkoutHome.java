@@ -1,6 +1,8 @@
 package com.google.mlkit.vision.demo.java;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class WorkoutHome extends AppCompatActivity {
     private DatabaseReference reference;
     private String userID;
     private RecyclerView recyclerView;
+    private WorkoutAdapter.RecyclerViewCLickListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +71,29 @@ public class WorkoutHome extends AppCompatActivity {
     }
 
     public void setAdapter(){
-        adapter= new WorkoutAdapter(workoutList);
+        setOnClickListener();
+        adapter= new WorkoutAdapter(workoutList,listener);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
     }
+
+    private void setOnClickListener() {
+        listener=new WorkoutAdapter.RecyclerViewCLickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent=new Intent(getApplicationContext(),DetailedWorkoutHistory.class);
+                intent.putExtra("workoutName",workoutList.get(position).getExerciseName());
+                intent.putExtra("Date",workoutList.get(position).getDate());
+                intent.putExtra("Sets",String.valueOf(workoutList.get(position).getSets()));
+                intent.putExtra("Repetitions",String.valueOf(workoutList.get(position).getRepititions()));
+                intent.putExtra("Feedback",workoutList.get(position).getFeedback());
+                startActivity(intent);
+            }
+        };
+    }
+
     @Override
     public void onResume(){
         super.onResume();

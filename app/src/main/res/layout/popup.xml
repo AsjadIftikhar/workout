@@ -12,7 +12,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="30dp"
-        android:paddingLeft="60"
+        android:paddingLeft="60dp"
         android:text="Configuration"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

@@ -21,10 +21,12 @@ import com.bumptech.glide.Glide;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHolder> {
 
+    private RecyclerViewCLickListener listener;
     private ArrayList<Workout> workoutList;
     Context context;
-    public WorkoutAdapter(ArrayList<Workout> workoutList){
+    public WorkoutAdapter(ArrayList<Workout> workoutList,RecyclerViewCLickListener listener){
         this.workoutList= workoutList;
+        this.listener=listener;
     }
     public void setList(ArrayList<Workout> workoutList)
     {
@@ -42,11 +44,9 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.exerciseName.setText(workoutList.get(position).getExerciseName());
-        holder.repCount.setText(String.valueOf(workoutList.get(position).getRepititions()));
         holder.date.setText(workoutList.get(position).getDate());
         holder.workout_image.setImageResource(R.drawable.ic_bicep);
         holder.iv_name.setImageResource(R.drawable.ic_name);
-        holder.iv_reps.setImageResource(R.drawable.ic_repetition);
         holder.iv_date.setImageResource(R.drawable.ic_date);
     }
 
@@ -55,27 +55,33 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
         return workoutList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView exerciseName;
-        private TextView repCount;
         private TextView date;
         private ImageView workout_image;
         private ImageView iv_name;
-        private ImageView iv_reps;
         private ImageView iv_date;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             exerciseName= itemView.findViewById(R.id.workoutName);
-            repCount= itemView.findViewById(R.id.repitition);
             date= itemView.findViewById(R.id.date);
             workout_image=itemView.findViewById(R.id.workout_image);
             iv_name=itemView.findViewById(R.id.iv_name);
-            iv_reps=itemView.findViewById(R.id.iv_reps);
             iv_date=itemView.findViewById(R.id.iv_date);
+            itemView.setOnClickListener(this);
 
 
         }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view,getAdapterPosition());
+        }
+    }
+
+    public interface RecyclerViewCLickListener{
+        void onClick(View v,int position);
     }
 }
