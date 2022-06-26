@@ -17,6 +17,7 @@ public class Squats {
     Paint paint;
     public static boolean exerciseStopFlag= false;
     static boolean stopFlag = false;
+    static boolean errorFlag=false;
     static String stage="down";
     public static int counter=0;
     private static final float TEXT_SIZE = 80.0f;
@@ -98,6 +99,7 @@ public class Squats {
         if(exerciseStopFlag ==false) {
             if (angle_left_squat >= 120) {
                 stopFlag = true;
+                errorFlag=false;
                 //canvas.drawText("You are in Squats", 120,350,paint);
                 stage = "up";
             } else {
@@ -107,6 +109,7 @@ public class Squats {
             if (stopFlag == false && angle_left_squat <= 80) {
                 if (angle_error_squat >= 125) {
                     canvas.drawText("Knees Moving", x + 50, y + TEXT_SIZE * 2, paint);
+                    errorFlag=true;
                     if (dummyCount == -1) {
 
                         negCounter++;
@@ -115,6 +118,7 @@ public class Squats {
                 }
                 if (angle_left_squat <= 50) {
                     canvas.drawText("Hips too low", x + 50, (y + TEXT_SIZE * 3) + 10, paint);
+                    errorFlag=true;
                     if (dummyCount == -1) {
                         negCounter++;
                         dummyCount = 0;
@@ -125,7 +129,7 @@ public class Squats {
                 stage = "down";
 
             }
-            if (stopFlag == false && angle_left_squat >= 110 && stage == "down") {
+            if (stopFlag == false && angle_left_squat >= 110 && stage == "down"&& errorFlag==false) {
                 stage = "up";
                 counter = counter + 1;
                 dummyCount = -1;

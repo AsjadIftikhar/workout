@@ -119,7 +119,7 @@ public class ShoulderPress {
             }
 
 
-            if (stopFlag == false && right_angle_for_tuck >= 130 && right_angle_for_curl >= 140 && stage == "down") {
+            if (stopFlag == false && right_angle_for_tuck >= 130 && right_angle_for_curl >= 145 && stage == "down") {
                 stage = "up";
                 counter = counter + 1;
                 dummyCount = -1;
