@@ -23,7 +23,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
 
     private RecyclerViewCLickListener listener;
     private ArrayList<Workout> workoutList;
-    Context context;
     public WorkoutAdapter(ArrayList<Workout> workoutList,RecyclerViewCLickListener listener){
         this.workoutList= workoutList;
         this.listener=listener;
@@ -45,7 +44,17 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.exerciseName.setText(workoutList.get(position).getExerciseName());
         holder.date.setText(workoutList.get(position).getDate());
-        holder.workout_image.setImageResource(R.drawable.ic_bicep);
+        switch (workoutList.get(position).getExerciseName()) {
+            case "Bicep Curl":
+                holder.workout_image.setImageResource(R.drawable.ic_bicep);
+                break;
+            case "Squats":
+                holder.workout_image.setImageResource(R.drawable.ic_squat);
+                break;
+            case "Shoulder Press":
+                holder.workout_image.setImageResource(R.drawable.ic_shoulderpress);
+                break;
+        }
         holder.iv_name.setImageResource(R.drawable.ic_name);
         holder.iv_date.setImageResource(R.drawable.ic_date);
     }

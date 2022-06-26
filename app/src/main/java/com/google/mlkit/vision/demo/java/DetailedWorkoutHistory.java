@@ -22,7 +22,7 @@ public class DetailedWorkoutHistory extends AppCompatActivity {
         String date="None";
         String sets="None";
         String reps="None";
-        String feedback="None";
+        String feedback="Non";
         Bundle extras=getIntent().getExtras();
         if(extras!=null){
             workoutName=extras.getString("workoutName");

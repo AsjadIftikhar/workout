@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,15 +72,21 @@ public class WorkoutHome extends AppCompatActivity {
     }
 
     public void setAdapter(){
-        setOnClickListener();
+        setonClickListener();
         adapter= new WorkoutAdapter(workoutList,listener);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        DividerItemDecoration divider=new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+        divider.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
+        recyclerView.addItemDecoration(divider);
+
         recyclerView.setAdapter(adapter);
+
     }
 
-    private void setOnClickListener() {
+    private void setonClickListener() {
         listener=new WorkoutAdapter.RecyclerViewCLickListener() {
             @Override
             public void onClick(View v, int position) {
